@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mary-mod:block/candy_machine",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "mary-mod:block/candy_machine",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "mary-mod:block/candy_machine",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "mary-mod:block/candy_machine"
+    }
+  }
+}

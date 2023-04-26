@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "mary-mod",
+  "version": "${version}",
+  "name": "MaryMod",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/alfredo/MaryMod"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/mary-mod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.xshaffter.marymod.client.MaryModClient"
+    ],
+    "main": [
+      "com.xshaffter.marymod.MaryMod"
+    ]
+  },
+  "mixins": [
+    "MaryMod.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

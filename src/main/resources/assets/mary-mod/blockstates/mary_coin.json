@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mary-mod:block/mary_coin",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "mary-mod:block/mary_coin",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "mary-mod:block/mary_coin"
+    },
+    "facing=west": {
+      "model": "mary-mod:block/mary_coin",
+      "y": 90
+    }
+  }
+}

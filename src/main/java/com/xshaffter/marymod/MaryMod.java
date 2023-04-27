@@ -1,6 +1,7 @@
 package com.xshaffter.marymod;
 
 import com.xshaffter.marymod.blocks.BlockManager;
+import com.xshaffter.marymod.blocks.entities.BlockEntityManager;
 import com.xshaffter.marymod.items.ItemManager;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +16,7 @@ public class MaryMod implements ModInitializer {
     @Override
     public void onInitialize() {
         ItemManager.registerModItems();
+        BlockEntityManager.registerEntities();
         BlockManager.registerModBlocks();
     }
 }

@@ -13,7 +13,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.xshaffter.marymod.client.MaryModClient"
+      "com.xshaffter.marymod.MaryModClient"
     ],
     "main": [
       "com.xshaffter.marymod.MaryMod"

@@ -1,4 +1,4 @@
-package com.xshaffter.marymod.client;
+package com.xshaffter.marymod;
 
 import com.xshaffter.marymod.blocks.BlockManager;
 import net.fabricmc.api.ClientModInitializer;
@@ -14,5 +14,6 @@ public class MaryModClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockManager.MARY_COIN, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockManager.MARY_BLUE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockManager.CANDY_MACHINE, RenderLayer.getCutout());
+
     }
 }

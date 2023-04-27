@@ -11,7 +11,7 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import org.jetbrains.annotations.Nullable;
 
-public class RotableBlock extends HorizontalFacingBlock {
+public abstract class RotableBlock extends HorizontalFacingBlock {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
     protected RotableBlock(Settings settings) {

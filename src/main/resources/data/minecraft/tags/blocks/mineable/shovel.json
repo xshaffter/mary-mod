@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mary_coin",
-    "mary_blue"
+    "mary-mod:mary_coin",
+    "mary-mod:mary_blue"
   ]
 }

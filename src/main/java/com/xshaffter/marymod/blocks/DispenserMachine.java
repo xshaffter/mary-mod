@@ -1,34 +1,32 @@
 package com.xshaffter.marymod.blocks;
 
-import com.xshaffter.marymod.blocks.bases.RotableBlock;
 import com.xshaffter.marymod.blocks.entities.CandyMachineEntity;
-import com.xshaffter.marymod.items.ItemManager;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DropperBlock;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.xshaffter.marymod.items.ItemManager.MARY_COIN_ITEM;
 
 
 @SuppressWarnings("deprecation")
-public class DispenserMachine extends DropperBlock {
+public class DispenserMachine extends DropperBlock implements BlockEntityProvider {
     private boolean canUse = true;
-    private DefaultedList<ItemStack> inventory;
 
     protected DispenserMachine() {
         super(FabricBlockSettings.of(Material.METAL)
@@ -37,35 +35,46 @@ public class DispenserMachine extends DropperBlock {
                 .hardness(10f)
                 .strength(40f)
         );
-
-        inventory = DefaultedList.of();
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack item = player.getStackInHand(hand);
-        if (item.isOf(MARY_COIN_ITEM)) {
-            if (this.inventory.isEmpty()) {
-                player.sendMessage(Text.literal("Creo que ya no queda nada más..."));
-                return ActionResult.PASS;
-            } else if (canUse) {
-                if (player instanceof ServerPlayerEntity serverPlayer) {
-                    dispense(serverPlayer, pos);
-                    item.decrement(1);
-                    canUse = false;
-                    Timer timer = new Timer();
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            canUse = true;
-                        }
-                    }, 150);
+        if (world.isClient()) {
+            return ActionResult.PASS;
+        }
+        if (canUse) {
+            if (item.isOf(MARY_COIN_ITEM)) {
+                var server = world.getServer();
+                DispenserBlockEntity entity = (DispenserBlockEntity) world.getBlockEntity(pos);
 
-                    return ActionResult.SUCCESS;
+                assert entity != null;
+                assert server != null;
+
+                int i = entity.chooseNonEmptySlot(world.random);
+                if (i < 0) {
+                    player.sendMessage(Text.literal("Creo que ya no queda nada más..."));
+                } else {
+                    dispense(server.getOverworld(), pos);
+                    item.decrement(1);
+                }
+                canUse = false;
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        canUse = true;
+                    }
+                }, 150);
+            } else if (player.isCreative()){
+                NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+                if (screenHandlerFactory != null) {
+                    player.openHandledScreen(screenHandlerFactory);
                 }
             }
         }
-        return super.onUse(state, world, pos, player, hand, hit);
+        return ActionResult.SUCCESS;
+
     }
 
     @Override
@@ -74,16 +83,18 @@ public class DispenserMachine extends DropperBlock {
     }
 
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        inventory.add(new ItemStack(BlockManager.MARY_BLUE));
-        super.onPlaced(world, pos, state, placer, itemStack);
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        // super.onStateReplaced(state, world, pos, newState, moved);
     }
 
-    public ItemStack pop() {
-        return this.inventory.remove(0);
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 2f, 1f);
     }
 
-    public void dispense(ServerPlayerEntity player, BlockPos pos) {
-        this.dispense(player.getServer().getOverworld(), pos);
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 2f, 1f);
+
     }
 }

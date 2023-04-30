@@ -1,4 +1,4 @@
-package com.xshaffter.marymod.blocks;
+package com.xshaffter.marymod.blocks.custom;
 
 import com.xshaffter.marymod.blocks.entities.CandyMachineEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -8,6 +8,7 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -28,7 +29,7 @@ import static com.xshaffter.marymod.items.ItemManager.MARY_COIN_ITEM;
 public class DispenserMachine extends DropperBlock implements BlockEntityProvider {
     private boolean canUse = true;
 
-    protected DispenserMachine() {
+    public DispenserMachine() {
         super(FabricBlockSettings.of(Material.METAL)
                 .nonOpaque()
                 .collidable(true)
@@ -55,7 +56,7 @@ public class DispenserMachine extends DropperBlock implements BlockEntityProvide
                 if (i < 0) {
                     player.sendMessage(Text.literal("Creo que ya no queda nada más..."));
                 } else {
-                    dispense(server.getOverworld(), pos);
+                    dispense(((ServerWorld) world), pos);
                     item.decrement(1);
                 }
                 canUse = false;

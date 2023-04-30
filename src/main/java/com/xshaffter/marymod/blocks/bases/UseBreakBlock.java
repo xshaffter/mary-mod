@@ -16,7 +16,10 @@ public abstract class UseBreakBlock extends RotableBlock {
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient) {
+            return ActionResult.PASS;
+        }
         world.breakBlock(pos, true);
-        return ActionResult.PASS;
+        return ActionResult.SUCCESS;
     }
 }

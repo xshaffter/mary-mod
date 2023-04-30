@@ -20,13 +20,8 @@ public class PoroGalleta extends UsableTextBlock {
                         .collidable(false)
                         .sounds(BlockSoundGroup.GLASS)
                         .nonOpaque(),
-                Text.literal("Unas poro galletas... se ven deliciosas")
+                Text.literal("Unas poro galletas... se ven deliciosas"),
+                VoxelShapes.cuboid(0f, 0f, 0f, 1f, 0.2f, 1f)
         );
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 0.2f, 1f);
     }
 }

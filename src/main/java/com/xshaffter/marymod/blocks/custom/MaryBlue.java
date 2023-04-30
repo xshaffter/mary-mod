@@ -1,4 +1,4 @@
-package com.xshaffter.marymod.blocks;
+package com.xshaffter.marymod.blocks.custom;
 
 import com.xshaffter.marymod.blocks.bases.RotableBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

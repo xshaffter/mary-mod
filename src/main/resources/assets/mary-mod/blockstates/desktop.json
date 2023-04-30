@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mary-mod:block/desktop"
+    },
+    "facing=east": {
+      "model": "mary-mod:block/desktop",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mary-mod:block/desktop",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mary-mod:block/desktop",
+      "y": 270
+    }
+  }
+}

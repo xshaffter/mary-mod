@@ -1,0 +1,8 @@
+{
+  "block.mary-mod.mary_coin": "Mary Coin placeable",
+  "item.mary-mod.mary_coin_item": "Mary Coin",
+  "item.mary-mod.ciggar": "Cigarro",
+  "tooltip.mary-mod.mary_coin": "Una moneda que",
+  "tooltip.mary-mod.mary_coin.2": "dictamina el destino",
+  "itemGroup.mary-mod.mary_mod": "Mary Mod"
+}

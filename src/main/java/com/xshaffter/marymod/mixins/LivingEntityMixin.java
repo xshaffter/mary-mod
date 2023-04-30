@@ -24,6 +24,9 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(at = @At("HEAD"), method = "tryUseTotem", cancellable = true)
     public void useCustomTotem(DamageSource source, CallbackInfoReturnable<Boolean> callback) {
         //initializes PlayerEntity entity, which is a copy of this cast to Living Entity and then PlayerEntity
+        if (source.isOutOfWorld()) {
+            callback.setReturnValue(false);
+        }
         LivingEntityMixin entity = this;
         var totem_item = new NormalTotem();
         totem_item.performResurrection(this);

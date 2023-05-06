@@ -41,18 +41,50 @@ public class BlockManager {
             VoxelShapes.cuboid(0f, 0f, 0f, 0.6f, 0.6f, 1f)
     );
     public static final Block DESKTOP = new UsableTextBlock(
-            Material.WOOD,
-            BlockSoundGroup.WOOD,
+            FabricBlockSettings.of(Material.WOOD)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.WOOD)
+                    .strength(4f)
+                    .hardness(1f),
             Text.literal("Mi mejor amigo, a veces siento que me habla"),
             VoxelShapes.cuboid(-1f, 0f, 0f, 1.7f, 1f, 1f)
     );
     public static final Block MONITOR = new UsableTextBlock(
-            Material.METAL,
-            BlockSoundGroup.GLASS,
+            FabricBlockSettings.of(Material.METAL)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.GLASS)
+                    .strength(4f)
+                    .hardness(1f),
             Text.literal("Mi mejor amigo, a veces siento que me habla"),
             VoxelShapes.cuboid(0f, 0f, 0f, 2f, 1f, 1f)
     );
 
+    public static final Block PAINT_SHELF = new UsableTextBlock(
+            Text.literal("Mis pinturas para los ajolotes"),
+            FabricBlockSettings.of(Material.WOOL)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.WOOL)
+                    .strength(4f)
+                    .hardness(1f)
+    );
+
+    public static final Block TOMB = new UsableTextBlock(
+            Text.literal("una tumba..."),
+            FabricBlockSettings.of(Material.STONE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.STONE)
+                    .strength(4f)
+                    .hardness(1f)
+    );
+
+    public static final Block EASEL = new UsableTextBlock(
+            Text.literal("una tumba..."),
+            FabricBlockSettings.of(Material.STONE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.STONE)
+                    .strength(4f)
+                    .hardness(1f)
+    );
 
     private static void registerBlock(final String name, final Block block, final BlockItem blockItem) {
         Registry.register(Registry.BLOCK, new Identifier(MaryMod.MOD_ID, name), block);
@@ -77,5 +109,8 @@ public class BlockManager {
         registerBlockAuto("computer", COMPUTER);
         registerBlockAuto("desktop", DESKTOP);
         registerBlockAuto("monitor", MONITOR);
+        registerBlockAuto("paint_shelf", PAINT_SHELF);
+        registerBlockAuto("easel", EASEL);
+        registerBlockAuto("tomb", TOMB);
     }
 }

@@ -1,4 +1,4 @@
-package com.xshaffter.marymod.items;
+package com.xshaffter.marymod.items.custom;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -12,10 +12,9 @@ import java.util.List;
 
 import static com.xshaffter.marymod.items.ItemGroups.MARY_MOD_GROUP;
 
-public class MaryCoinItem extends Item {
-    private boolean canUse = true;
+public class MaryCoinItem extends MaryItem {
     public MaryCoinItem() {
-        super(new Item.Settings().fireproof().rarity(Rarity.EPIC).maxCount(64).group(MARY_MOD_GROUP));
+        super(new Item.Settings().fireproof().rarity(Rarity.EPIC).maxCount(64));
     }
 
     @Override

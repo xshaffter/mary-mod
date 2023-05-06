@@ -90,12 +90,12 @@ public class DispenserMachine extends DropperBlock implements BlockEntityProvide
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 2f, 1f);
+        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.4f, 1f);
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 2f, 1f);
+        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.4f, 1f);
 
     }
 }

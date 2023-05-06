@@ -46,6 +46,12 @@ public class UsableTextBlock extends RotableBlock {
         );
     }
 
+    public UsableTextBlock(Text text, Settings settings) {
+        this(settings, text,
+                VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1f, 1f)
+        );
+    }
+
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {

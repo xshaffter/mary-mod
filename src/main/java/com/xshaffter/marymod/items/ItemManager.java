@@ -1,14 +1,38 @@
 package com.xshaffter.marymod.items;
 
 import com.xshaffter.marymod.MaryMod;
-import net.minecraft.item.BlockItem;
+import com.xshaffter.marymod.items.custom.*;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
+
+import static com.xshaffter.marymod.items.ItemGroups.MARY_MOD_GROUP;
 
 public class ItemManager {
     public static final Item MARY_COIN_ITEM = new MaryCoinItem();
-    public static final Item CIGGAR = new Ciggar();
+    public static final Item SWORD = new Sword();
+    public static final Item HAMMER = new Hammer();
+
+    public static final Item CHOCORAMO = new MaryItem(
+            new FabricItemSettings()
+                    .rarity(Rarity.COMMON)
+                    .maxCount(16)
+                    .food(new FoodComponent.Builder()
+                            .hunger(6)
+                            .snack()
+                            .alwaysEdible()
+                            .saturationModifier(11)
+                            .build())
+    );
+    public static final Item CIGGAR = new MaryItem(
+            new FabricItemSettings()
+                    .rarity(Rarity.COMMON)
+                    .maxCount(16)
+                    .fireproof()
+    );
 
 
     private static void registerItem(String name, Item item) {
@@ -18,5 +42,8 @@ public class ItemManager {
     public static void registerModItems() {
         registerItem("ciggar", CIGGAR);
         registerItem("mary_coin_item", MARY_COIN_ITEM);
+        registerItem("sword", SWORD);
+        registerItem("hammer", HAMMER);
+        registerItem("chocoramo", CHOCORAMO);
     }
 }

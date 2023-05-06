@@ -1,8 +1,9 @@
-package com.xshaffter.marymod.util;
+package com.xshaffter.marymod.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.xshaffter.marymod.MaryMod;
 import com.xshaffter.marymod.mixins.ScreenMixin;
+import com.xshaffter.marymod.updater.ResourceDownloader;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.screen.ConnectScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -15,10 +16,12 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import java.io.IOException;
+
 public class NewTitleScreen extends TitleScreen {
     private static final Identifier SPLASH =
-            new Identifier(MaryMod.MOD_ID, "textures/gui/background/main_menu.jpg");
-    private static final Identifier MINECRAFT_TITLE_TEXTURE = new Identifier("textures/gui/title/minecraft.png");
+            new Identifier(MaryMod.MOD_ID, "textures/gui/background/main_menu.png");
+    private static final Identifier MINECRAFT_TITLE_TEXTURE = new Identifier(MaryMod.MOD_ID, "textures/gui/title/marycraft.png");
 
     private final ServerInfo serverEntry = new ServerInfo(I18n.translate("selectServer.defaultName"), "54.39.26.111:25583", false);
 
@@ -31,10 +34,26 @@ public class NewTitleScreen extends TitleScreen {
 
         int y = height / 4 + 48;
         int spacingY = 24;
-        this.addDrawableChild(new ButtonWidget(width / 2 - 100, y + spacingY, 200, 20, Text.literal("Jugar"), button -> {
+        var playBtn = new ButtonWidget(width / 2 - 100, y + spacingY, 200, 20, Text.literal("Jugar"), button -> {
             assert NewTitleScreen.this.client != null;
             ConnectScreen.connect(NewTitleScreen.this, NewTitleScreen.this.client, ServerAddress.parse(serverEntry.address), serverEntry);
-        }, ButtonWidget.EMPTY));
+        }, ButtonWidget.EMPTY);
+
+
+        var updateBtn = new ButtonWidget(width / 2 - 100, y + spacingY * 2, 200, 20, Text.literal("Actualizar (WIP)"), button -> {
+            var downloader = new ResourceDownloader();
+            try {
+                downloader.CheckModpackVersion();
+                assert this.client != null;
+                this.client.setScreen(new RestartGameScreen());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }, ButtonWidget.EMPTY);
+
+
+        this.addDrawableChild(playBtn);
+        this.addDrawableChild(updateBtn);
 
         drawCustomTitleScreen(matrixStack, width, height);
         drawMinecraftLogo(matrixStack);
@@ -65,11 +84,8 @@ public class NewTitleScreen extends TitleScreen {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         this.drawWithOutline(this.width / 2 - 137, 30, (x, y) -> {
-            this.drawTexture(matrixStack, x, (int) y, 0, 0, 99, 44);
-            this.drawTexture(matrixStack, x + 99, (int) y, 129, 0, 27, 44);
-            this.drawTexture(matrixStack, x + 99 + 26, (int) y, 126, 0, 3, 44);
-            this.drawTexture(matrixStack, x + 99 + 26 + 3, (int) y, 99, 0, 26, 44);
-            this.drawTexture(matrixStack, x + 155, (int) y, 0, 45, 155, 44);
+            this.drawTexture(matrixStack, x, y, 0, 0, 155, 44);
+            this.drawTexture(matrixStack, x + 155, y, 0, 45, 155, 44);
         });
     }
 
@@ -85,8 +101,8 @@ public class NewTitleScreen extends TitleScreen {
     }
 
     private boolean isPlayBtn(ButtonWidget button) {
-        return button.getMessage().toString().equals("translation{key='menu.singleplayer', args=[]}") ||
-                button.getMessage().toString().equals("translation{key='menu.multiplayer', args=[]}") ||
-                button.getMessage().toString().equals("translation{key='menu.online', args=[]}");
+        return button.getMessage().toString().equals("translation{key='menu.multiplayer', args=[]}") ||
+                button.getMessage().toString().equals("translation{key='menu.online', args=[]}")/* ||
+                button.getMessage().toString().equals("translation{key='menu.singleplayer', args=[]}")*/;
     }
 }

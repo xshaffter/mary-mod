@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Objects;
+
 @Mixin(GameMenuScreen.class)
 public abstract class GameMenuScreenMixin extends Screen {
 
@@ -23,14 +25,17 @@ public abstract class GameMenuScreenMixin extends Screen {
 
     @Inject(at = @At("HEAD"), method = "initWidgets")
     private void initWidgets(CallbackInfo info) {
+        assert this.client != null;
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 24 + -16, 204, 20, Text.translatable("menu.returnToGame"), (button) -> {
             this.client.setScreen((Screen)null);
             this.client.mouse.lockCursor();
         }));
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 48 + -16, 98, 20, Text.translatable("gui.advancements"), (button) -> {
+            assert this.client.player != null;
             this.client.setScreen(new AdvancementsScreen(this.client.player.networkHandler.getAdvancementHandler()));
         }));
         this.addDrawableChild(new ButtonWidget(this.width / 2 + 4, this.height / 4 + 48 + -16, 98, 20, Text.translatable("gui.stats"), (button) -> {
+            assert this.client.player != null;
             this.client.setScreen(new StatsScreen(this, this.client.player.getStatHandler()));
         }));
         String string = SharedConstants.getGameVersion().isStable() ? "https://aka.ms/javafeedback?ref=game" : "https://aka.ms/snapshotfeedback?ref=game";
@@ -56,7 +61,7 @@ public abstract class GameMenuScreenMixin extends Screen {
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 96 + -16, 98, 20, Text.translatable("menu.options"), (button) -> {
             this.client.setScreen(new OptionsScreen(this, this.client.options));
         }));
-        if (this.client.isIntegratedServerRunning() && !this.client.getServer().isRemote()) {
+        if (this.client.isIntegratedServerRunning() && !Objects.requireNonNull(this.client.getServer()).isRemote()) {
             this.addDrawableChild(new ButtonWidget(this.width / 2 + 4, this.height / 4 + 96 + -16, 98, 20, Text.translatable("menu.shareToLan"), (button) -> {
                 this.client.setScreen(new OpenToLanScreen(this));
             }));
@@ -70,6 +75,7 @@ public abstract class GameMenuScreenMixin extends Screen {
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 120 + -16, 204, 20, text, (button) -> {
             boolean bl = this.client.isInSingleplayer();
             button.active = false;
+            assert this.client.world != null;
             this.client.world.disconnect();
             if (bl) {
                 this.client.disconnect(new MessageScreen(Text.translatable("menu.savingLevel")));

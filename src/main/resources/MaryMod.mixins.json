@@ -4,11 +4,13 @@
   "package": "com.xshaffter.marymod.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "LivingEntityMixin"
+    "AdvancementDisplayMixin",
+    "LivingEntityMixin",
+    "PlayerEntityMixin"
   ],
   "client": [
-    "ScreenMixin",
-    "GameMenuScreenMixin"
+    "GameMenuScreenMixin",
+    "ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

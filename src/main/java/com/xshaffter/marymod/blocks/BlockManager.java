@@ -2,7 +2,7 @@ package com.xshaffter.marymod.blocks;
 
 import com.xshaffter.marymod.MaryMod;
 import com.xshaffter.marymod.blocks.bases.UsableTextBlock;
-import com.xshaffter.marymod.blocks.custom.DispenserMachine;
+import com.xshaffter.marymod.blocks.custom.CandyMachine;
 import com.xshaffter.marymod.blocks.custom.MaryBlue;
 import com.xshaffter.marymod.blocks.custom.MaryCoin;
 import com.xshaffter.marymod.blocks.custom.PoroGalleta;
@@ -22,7 +22,7 @@ public class BlockManager {
     public static final Block MARY_COIN = new MaryCoin();
     public static final Block MARY_BLUE = new MaryBlue();
     public static final Block PORO_GALLETA = new PoroGalleta();
-    public static final Block CANDY_MACHINE = new DispenserMachine();
+    public static final Block CANDY_MACHINE = new CandyMachine();
 
     public static final Block AMAZON_BOX = new UsableTextBlock(
             Material.WOOD,

@@ -1,5 +1,6 @@
 package com.xshaffter.marymod.blocks.custom;
 
+import com.xshaffter.marymod.blocks.bases.RotableBlock;
 import com.xshaffter.marymod.blocks.entities.CandyMachineEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -26,10 +28,9 @@ import static com.xshaffter.marymod.items.ItemManager.MARY_COIN_ITEM;
 
 
 @SuppressWarnings("deprecation")
-public class DispenserMachine extends DropperBlock implements BlockEntityProvider {
-    private boolean canUse = true;
+public class CandyMachine extends RotableBlock implements BlockEntityProvider {
 
-    public DispenserMachine() {
+    public CandyMachine() {
         super(FabricBlockSettings.of(Material.METAL)
                 .nonOpaque()
                 .collidable(true)
@@ -40,42 +41,16 @@ public class DispenserMachine extends DropperBlock implements BlockEntityProvide
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack item = player.getStackInHand(hand);
-        if (world.isClient()) {
-            return ActionResult.PASS;
-        }
-        if (canUse) {
-            if (item.isOf(MARY_COIN_ITEM)) {
-                var server = world.getServer();
-                DispenserBlockEntity entity = (DispenserBlockEntity) world.getBlockEntity(pos);
-
-                assert entity != null;
-                assert server != null;
-
-                int i = entity.chooseNonEmptySlot(world.random);
-                if (i < 0) {
-                    player.sendMessage(Text.literal("Creo que ya no queda nada más..."));
-                } else {
-                    dispense(((ServerWorld) world), pos);
-                    item.decrement(1);
-                }
-                canUse = false;
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        canUse = true;
-                    }
-                }, 150);
-            } else if (player.isCreative()){
-                NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-                if (screenHandlerFactory != null) {
-                    player.openHandledScreen(screenHandlerFactory);
-                }
+        if (!world.isClient)
+        {
+            if (!state.get(Properties.BOTTOM)) {
+                pos = pos.down();
             }
+            BlockEntity te = world.getBlockEntity(pos);
+            if (te instanceof CandyMachineEntity)
+                ((CandyMachineEntity) te).openGui(player);
         }
         return ActionResult.SUCCESS;
-
     }
 
     @Override

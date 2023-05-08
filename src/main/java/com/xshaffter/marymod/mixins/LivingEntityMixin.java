@@ -1,6 +1,8 @@
 package com.xshaffter.marymod.mixins;
 
 import com.xshaffter.marymod.items.totems.NormalTotem;
+import com.xshaffter.marymod.util.IEntityDataSaver;
+import com.xshaffter.marymod.util.LivingEntityBridge;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -8,15 +10,23 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity {
+public abstract class LivingEntityMixin extends Entity implements IEntityDataSaver {
+    private boolean isFirstDead(){
+        return this.getPersistentData().getBoolean("firstDead");
+    }
+    private NbtCompound persistentData;
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -28,13 +38,40 @@ public abstract class LivingEntityMixin extends Entity {
         if (source.isOutOfWorld()) {
             callback.cancel();
         }
-        if (((Entity)this) instanceof PlayerEntity) {
+        //noinspection ConstantValue
+        if (((Entity)this) instanceof PlayerEntity player) {
             var totem_item = new NormalTotem();
             totem_item.performResurrection(this);
             totem_item.postRevive(this);
             callback.setReturnValue(true);
+            if (isFirstDead()) {
+                this.getPersistentData().putBoolean("firstDead", false);
+                player.sendMessage(Text.literal("¿Qué? ¿enserio creíste que te dejaríamos morir?"));
+            }
         }
 
+    }
+
+    @Override
+    public NbtCompound getPersistentData() {
+        if (persistentData == null) {
+            persistentData = new NbtCompound();
+        }
+        return persistentData;
+    }
+
+    @Inject(method = "writeCustomDataToNbt", at = @At("RETURN"))
+    protected void writeNbt(NbtCompound nbt, CallbackInfo info) {
+        if (persistentData != null) {
+            nbt.put("marymod.data", persistentData);
+        }
+    }
+
+    @Inject(method = "readCustomDataFromNbt", at = @At("RETURN"))
+    protected void injectedReadNBT(NbtCompound nbt, CallbackInfo info) {
+        if (nbt.contains("marymod.data", NbtElement.COMPOUND_TYPE)) {
+            persistentData = nbt.getCompound("marymod.data");
+        }
     }
 
 }

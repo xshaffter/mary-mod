@@ -3,8 +3,10 @@ package com.xshaffter.marymod.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.xshaffter.marymod.MaryMod;
 import com.xshaffter.marymod.mixins.ScreenMixin;
+import com.xshaffter.marymod.mixins.TitleScreenMixin;
 import com.xshaffter.marymod.updater.ResourceDownloader;
 import net.minecraft.client.gui.Drawable;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ConnectScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -21,14 +23,14 @@ import java.io.IOException;
 public class NewTitleScreen extends TitleScreen {
     private static final Identifier SPLASH =
             new Identifier(MaryMod.MOD_ID, "textures/gui/background/main_menu.png");
-    public static final Identifier MINECRAFT_TITLE_TEXTURE = new Identifier(MaryMod.MOD_ID, "textures/gui/title/marycraft.png");
+    public static final Identifier MINECRAFT_TITLE_TEXTURE = new Identifier(MaryMod.MOD_ID, "textures/gui/title/marycraft_logo.png");
 
     private final ServerInfo serverEntry = new ServerInfo(I18n.translate("selectServer.defaultName"), "54.39.26.111:25583", false);
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-
+        ((TitleScreenMixin) this).setSplashText("");
         int width = this.width;
         int height = this.height;
 
@@ -83,8 +85,7 @@ public class NewTitleScreen extends TitleScreen {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         this.drawWithOutline(this.width / 2 - 137, 30, (x, y) -> {
-            this.drawTexture(matrixStack, x, y, 0, 0, 155, 44);
-            this.drawTexture(matrixStack, x + 155, y, 0, 45, 155, 44);
+            drawTexture(matrixStack, x - 15, y, this.getZOffset(), 0, 0, 310, 44, 310, 44);
         });
     }
 

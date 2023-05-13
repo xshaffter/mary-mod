@@ -104,8 +104,7 @@ public abstract class GameMenuScreenMixin extends Screen {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         this.drawWithOutline(this.width / 2 - 137, 30, (x, y) -> {
-            this.drawTexture(matrixStack, x, y, 0, 0, 155, 44);
-            this.drawTexture(matrixStack, x + 155, y, 0, 45, 155, 44);
+            drawTexture(matrixStack, x - 15, y, this.getZOffset(), 0, 0, 310, 44, 310, 44);
         });
     }
 

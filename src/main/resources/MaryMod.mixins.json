@@ -10,7 +10,8 @@
   ],
   "client": [
     "GameMenuScreenMixin",
-    "ScreenMixin"
+    "ScreenMixin",
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

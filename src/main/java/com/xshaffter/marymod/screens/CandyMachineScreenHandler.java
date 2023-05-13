@@ -16,8 +16,8 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
 public class CandyMachineScreenHandler extends ScreenHandler {
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 1;
+    public static final int INPUT_SLOT = 0;
+    public static final int OUTPUT_SLOT = 1;
     private final PropertyDelegate propertyDelegate;
     private final CandyMachineSubHandler subHandler;
 

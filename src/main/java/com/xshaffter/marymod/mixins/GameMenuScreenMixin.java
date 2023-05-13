@@ -1,23 +1,31 @@
 package com.xshaffter.marymod.mixins;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.xshaffter.marymod.screens.NewTitleScreen;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.gui.screen.advancement.AdvancementsScreen;
 import net.minecraft.client.gui.screen.multiplayer.SocialInteractionsScreen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
+
 @Mixin(GameMenuScreen.class)
 public abstract class GameMenuScreenMixin extends Screen {
 
+    @Accessor("showMenu")
+    abstract boolean getShowMenu();
 
     protected GameMenuScreenMixin(Text title) {
         super(title);
@@ -27,7 +35,7 @@ public abstract class GameMenuScreenMixin extends Screen {
     private void initWidgets(CallbackInfo info) {
         assert this.client != null;
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 24 + -16, 204, 20, Text.translatable("menu.returnToGame"), (button) -> {
-            this.client.setScreen((Screen)null);
+            this.client.setScreen(null);
             this.client.mouse.lockCursor();
         }));
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 102, this.height / 4 + 48 + -16, 98, 20, Text.translatable("gui.advancements"), (button) -> {
@@ -48,7 +56,7 @@ public abstract class GameMenuScreenMixin extends Screen {
                 this.client.setScreen(this);
             }, string, true));
         }));
-        ButtonWidget buttonWidget = (ButtonWidget)this.addDrawableChild(new ButtonWidget(this.width / 2 + 4, this.height / 4 + 72 + -16, 98, 20, Text.translatable("menu.reportBugs"), (button) -> {
+        ButtonWidget buttonWidget = this.addDrawableChild(new ButtonWidget(this.width / 2 + 4, this.height / 4 + 72 + -16, 98, 20, Text.translatable("menu.reportBugs"), (button) -> {
             this.client.setScreen(new ConfirmLinkScreen((confirmed) -> {
                 if (confirmed) {
                     Util.getOperatingSystem().open("https://aka.ms/snapshotbugs?ref=game");
@@ -87,6 +95,30 @@ public abstract class GameMenuScreenMixin extends Screen {
             this.client.setScreen(titleScreen);
 
         }));
+    }
+
+
+    private void drawModLogo(MatrixStack matrixStack) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, NewTitleScreen.MINECRAFT_TITLE_TEXTURE);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+        this.drawWithOutline(this.width / 2 - 137, 30, (x, y) -> {
+            this.drawTexture(matrixStack, x, y, 0, 0, 155, 44);
+            this.drawTexture(matrixStack, x + 155, y, 0, 45, 155, 44);
+        });
+    }
+
+    @Inject(at = @At("HEAD"), method = "render", cancellable = true)
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        if (this.getShowMenu()) {
+            this.renderBackground(matrices);
+            drawModLogo(matrices);
+        } else {
+            drawModLogo(matrices);
+        }
+        super.render(matrices, mouseX, mouseY, delta);
+        ci.cancel();
     }
 
 }

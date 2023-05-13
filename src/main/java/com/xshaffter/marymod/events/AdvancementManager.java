@@ -1,6 +1,8 @@
 package com.xshaffter.marymod.events;
 
 import com.xshaffter.marymod.MaryMod;
+import com.xshaffter.marymod.events.criterion.DummyCriterion;
+import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
@@ -18,5 +20,9 @@ public class AdvancementManager {
         for (var criterion : unobtained) {
             player.getAdvancementTracker().grantCriterion(adv, criterion);
         }
+    }
+
+    public static void registerCriterions() {
+        CriterionRegistry.register(new DummyCriterion());
     }
 }

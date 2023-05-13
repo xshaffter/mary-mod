@@ -34,7 +34,7 @@ public class CandyMachineEntity extends BlockEntity implements NamedScreenHandle
     public static final int FRONT_SIZE = 2;
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private int maxProgress = 72;
+    private int maxProgress = (int) (20 * 1.2);
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(FRONT_SIZE, ItemStack.EMPTY);
     private final TradeInventory tradeInventory = new TradeInventory();
 
@@ -43,16 +43,23 @@ public class CandyMachineEntity extends BlockEntity implements NamedScreenHandle
         propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 switch (index) {
-                    case 0: return CandyMachineEntity.this.progress;
-                    case 1: return CandyMachineEntity.this.maxProgress;
-                    default: return 0;
+                    case 0:
+                        return CandyMachineEntity.this.progress;
+                    case 1:
+                        return CandyMachineEntity.this.maxProgress;
+                    default:
+                        return 0;
                 }
             }
 
             public void set(int index, int value) {
-                switch(index) {
-                    case 0: CandyMachineEntity.this.progress = value; break;
-                    case 1: CandyMachineEntity.this.maxProgress = value; break;
+                switch (index) {
+                    case 0:
+                        CandyMachineEntity.this.progress = value;
+                        break;
+                    case 1:
+                        CandyMachineEntity.this.maxProgress = value;
+                        break;
                 }
             }
 
@@ -104,14 +111,14 @@ public class CandyMachineEntity extends BlockEntity implements NamedScreenHandle
     }
 
     public static void tick(World world, BlockPos blockPos, BlockState state, CandyMachineEntity entity) {
-        if(world.isClient()) {
+        if (world.isClient()) {
             return;
         }
 
-        if(hasRecipe(entity)) {
+        if (hasRecipe(entity)) {
             entity.progress++;
             markDirty(world, blockPos, state);
-            if(entity.progress >= entity.maxProgress) {
+            if (entity.progress >= entity.maxProgress) {
                 craftItem(entity);
             }
         } else {
@@ -126,11 +133,14 @@ public class CandyMachineEntity extends BlockEntity implements NamedScreenHandle
             inventory.setStack(i, entity.getStack(i));
         }
 
-        if(hasRecipe(entity)) {
-            entity.removeStack(1, 1);
+        if (hasRecipe(entity)) {
+            entity.removeStack(CandyMachineScreenHandler.INPUT_SLOT, 1);
 
-            entity.setStack(2, new ItemStack(ItemManager.MARY_COIN_ITEM,
-                    entity.getStack(2).getCount() + 1));
+            assert entity.world != null;
+            var random = entity.tradeInventory.chooseNonEmptySlot(entity.world.random);
+            if (random > 0) {
+                entity.setStack(CandyMachineScreenHandler.OUTPUT_SLOT, entity.tradeInventory.getStack(random));
+            }
 
             entity.resetProgress();
         }
@@ -142,17 +152,14 @@ public class CandyMachineEntity extends BlockEntity implements NamedScreenHandle
             inventory.setStack(i, entity.getStack(i));
         }
 
-        boolean hasRawGemInFirstSlot = entity.getStack(1).getItem() == ItemManager.MARY_COIN_ITEM;
+        boolean hasRawGemInFirstSlot = entity.getStack(CandyMachineScreenHandler.INPUT_SLOT).getItem() == ItemManager.MARY_COIN_ITEM;
 
-        return hasRawGemInFirstSlot && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, ItemManager.MARY_COIN_ITEM);
-    }
-
-    private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {
-        return inventory.getStack(2).getItem() == output || inventory.getStack(2).isEmpty();
+        return hasRawGemInFirstSlot && canInsertAmountIntoOutputSlot(inventory);
     }
 
     private static boolean canInsertAmountIntoOutputSlot(SimpleInventory inventory) {
-        return inventory.getStack(2).getMaxCount() > inventory.getStack(2).getCount();
+        var stack = inventory.getStack(CandyMachineScreenHandler.OUTPUT_SLOT);
+
+        return stack.getMaxCount() > stack.getCount();
     }
 }

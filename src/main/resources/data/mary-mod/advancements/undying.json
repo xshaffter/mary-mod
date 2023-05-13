@@ -1,16 +1,15 @@
 {
   "display": {
     "icon": {
-      "item": "mary-mod:ciggar"
+      "item": "minecraft:totem_of_undying"
     },
-    "title": "Gastronomia",
-    "description": "Has terminado los juicios de desbaneo!",
-    "frame": "goal",
+    "title": "Inmortal",
+    "description": "Enserio creiste que te dejariamos morir?",
+    "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "mary-mod:stage3",
   "criteria": {
     "requirement": {
       "trigger": "mary-mod:dummy"

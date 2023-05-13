@@ -21,7 +21,7 @@ import java.io.IOException;
 public class NewTitleScreen extends TitleScreen {
     private static final Identifier SPLASH =
             new Identifier(MaryMod.MOD_ID, "textures/gui/background/main_menu.png");
-    private static final Identifier MINECRAFT_TITLE_TEXTURE = new Identifier(MaryMod.MOD_ID, "textures/gui/title/marycraft.png");
+    public static final Identifier MINECRAFT_TITLE_TEXTURE = new Identifier(MaryMod.MOD_ID, "textures/gui/title/marycraft.png");
 
     private final ServerInfo serverEntry = new ServerInfo(I18n.translate("selectServer.defaultName"), "54.39.26.111:25583", false);
 
@@ -63,9 +63,8 @@ public class NewTitleScreen extends TitleScreen {
 
     private void drawCopyrightNotice(MatrixStack matrixStack, int width, int height) {
         assert this.client != null;
-        drawStringWithShadow(matrixStack, this.client.textRenderer, "Copyright Mojang AB. Do not distribute!",
-                width - this.textRenderer.getWidth("Copyright Mojang AB. Do not distribute!") - 2,
-                height - 10, 0xFFFFFFFF);
+        var text = "Copyright Mojang AB. Do not distribute!";
+        drawStringWithShadow(matrixStack, this.client.textRenderer, text, width - this.textRenderer.getWidth(text) - 2, height - 10, 0xFFFFFFFF);
     }
 
 

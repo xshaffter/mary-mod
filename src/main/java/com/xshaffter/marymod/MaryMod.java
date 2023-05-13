@@ -2,6 +2,7 @@ package com.xshaffter.marymod;
 
 import com.xshaffter.marymod.blocks.BlockManager;
 import com.xshaffter.marymod.blocks.entities.BlockEntityManager;
+import com.xshaffter.marymod.events.AdvancementManager;
 import com.xshaffter.marymod.items.ItemManager;
 import com.xshaffter.marymod.screens.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
@@ -20,5 +21,6 @@ public class MaryMod implements ModInitializer {
         BlockEntityManager.registerEntities();
         BlockManager.registerModBlocks();
         ModScreenHandlers.registerAllScreenHandlers();
+        AdvancementManager.registerCriterions();
     }
 }

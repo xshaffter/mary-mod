@@ -37,7 +37,7 @@ public class BlockManager {
     public static final Block COMPUTER = new UsableTextBlock(
             Material.METAL,
             BlockSoundGroup.GLASS,
-            Text.literal("Mi mejor amigo, a veces siento que me habla"),
+            Text.literal("La mamalona"),
             VoxelShapes.cuboid(0f, 0f, 0f, 0.6f, 0.6f, 1f)
     );
     public static final Block DESKTOP = new UsableTextBlock(
@@ -46,7 +46,7 @@ public class BlockManager {
                     .sounds(BlockSoundGroup.WOOD)
                     .strength(4f)
                     .hardness(1f),
-            Text.literal("Mi mejor amigo, a veces siento que me habla"),
+            Text.literal("Creo que no quiero streamer de momento"),
             VoxelShapes.cuboid(-1f, 0f, 0f, 1.7f, 1f, 1f)
     );
     public static final Block MONITOR = new UsableTextBlock(
@@ -55,7 +55,7 @@ public class BlockManager {
                     .sounds(BlockSoundGroup.GLASS)
                     .strength(4f)
                     .hardness(1f),
-            Text.literal("Mi mejor amigo, a veces siento que me habla"),
+            Text.literal("Mi pequeño setup"),
             VoxelShapes.cuboid(0f, 0f, 0f, 2f, 1f, 1f)
     );
 
@@ -78,7 +78,7 @@ public class BlockManager {
     );
 
     public static final Block EASEL = new UsableTextBlock(
-            Text.literal("una tumba..."),
+            Text.literal("Aqui deberian estar mis pinturas... donde estaran?"),
             FabricBlockSettings.of(Material.STONE)
                     .nonOpaque()
                     .sounds(BlockSoundGroup.STONE)

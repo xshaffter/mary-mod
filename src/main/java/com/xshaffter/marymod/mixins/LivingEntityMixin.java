@@ -26,7 +26,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements IEntityDataSaver {
     private boolean isFirstDead(){
-        return this.getPersistentData().getBoolean("firstDead");
+        if (this.getPersistentData().contains("firstDead")) {
+            return this.getPersistentData().getBoolean("firstDead");
+        } else {
+            return true;
+        }
     }
     private NbtCompound persistentData;
 

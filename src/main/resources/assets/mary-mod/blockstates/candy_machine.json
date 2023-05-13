@@ -14,14 +14,6 @@
     "facing=west": {
       "model": "mary-mod:block/candy_machine",
       "y": 270
-    },
-    "facing=up": {
-      "model": "mary-mod:block/candy_machine",
-      "y": 270
-    },
-    "facing=down": {
-      "model": "mary-mod:block/candy_machine",
-      "y": 270
     }
   }
 }

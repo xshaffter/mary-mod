@@ -1,95 +1,158 @@
 package com.xshaffter.marymod.blocks.entities;
 
+import com.xshaffter.marymod.MaryMod;
 import com.xshaffter.marymod.blocks.BlockManager;
 import com.xshaffter.marymod.items.ItemManager;
+import com.xshaffter.marymod.screens.CandyMachineScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.Merchant;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOfferList;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class CandyMachineEntity extends BlockEntity implements Merchant, Nameable {
-    PlayerEntity customer = null;
-    TradeOfferList offers;
+public class CandyMachineEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+    public static final int FRONT_SIZE = 2;
+    protected final PropertyDelegate propertyDelegate;
+    private int progress = 0;
+    private int maxProgress = 72;
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(FRONT_SIZE, ItemStack.EMPTY);
+    private final TradeInventory tradeInventory = new TradeInventory();
 
     public CandyMachineEntity(BlockPos pos, BlockState state) {
         super(BlockEntityManager.CANDY_MACHINE_ENTITY, pos, state);
-        this.offers = new TradeOfferList();
-        offers.add(new TradeOffer(new ItemStack(ItemManager.MARY_COIN_ITEM), new ItemStack(BlockManager.MARY_BLUE), 1, 0, 1));
+        propertyDelegate = new PropertyDelegate() {
+            public int get(int index) {
+                switch (index) {
+                    case 0: return CandyMachineEntity.this.progress;
+                    case 1: return CandyMachineEntity.this.maxProgress;
+                    default: return 0;
+                }
+            }
+
+            public void set(int index, int value) {
+                switch(index) {
+                    case 0: CandyMachineEntity.this.progress = value; break;
+                    case 1: CandyMachineEntity.this.maxProgress = value; break;
+                }
+            }
+
+            public int size() {
+                return 2;
+            }
+        };
+    }
+
+
+    @Override
+    public DefaultedList<ItemStack> getItems() {
+        return inventory;
     }
 
     @Override
-    public Text getName() {
+    public Text getDisplayName() {
         return Text.literal("Maquina de dulces");
-    }
-
-    @Override
-    public void setCustomer(@Nullable PlayerEntity customer) {
-        if (customer instanceof ServerPlayerEntity) {
-            this.customer = customer;
-        }
     }
 
     @Nullable
     @Override
-    public PlayerEntity getCustomer() {
-        return customer;
+    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        return new CandyMachineScreenHandler(syncId, inv, this, tradeInventory, propertyDelegate);
     }
 
     @Override
-    public TradeOfferList getOffers() {
-        return offers;
+    protected void writeNbt(NbtCompound nbt) {
+        var tradeNBT = nbt.getCompound("trades");
+
+        Inventories.writeNbt(tradeNBT, tradeInventory.inventory);
+        nbt.put("trades", tradeNBT);
+        Inventories.writeNbt(nbt, inventory);
+
+        nbt.putInt("candy_machine.progress", progress);
     }
 
     @Override
-    public void setOffersFromServer(TradeOfferList offers) {
+    public void readNbt(NbtCompound nbt) {
+        var tradeNBT = nbt.getCompound("trades");
+        Inventories.readNbt(nbt, inventory);
+        Inventories.readNbt(tradeNBT, tradeInventory.inventory);
 
+        progress = nbt.getInt("candy_machine.progress");
     }
 
-    @Override
-    public void trade(TradeOffer offer) {
-
+    private void resetProgress() {
+        this.progress = 0;
     }
 
-    @Override
-    public void onSellingItem(ItemStack stack) {
-        offers.remove(stack);
+    public static void tick(World world, BlockPos blockPos, BlockState state, CandyMachineEntity entity) {
+        if(world.isClient()) {
+            return;
+        }
+
+        if(hasRecipe(entity)) {
+            entity.progress++;
+            markDirty(world, blockPos, state);
+            if(entity.progress >= entity.maxProgress) {
+                craftItem(entity);
+            }
+        } else {
+            entity.resetProgress();
+            markDirty(world, blockPos, state);
+        }
     }
 
-    @Override
-    public int getExperience() {
-        return 0;
+    private static void craftItem(CandyMachineEntity entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        if(hasRecipe(entity)) {
+            entity.removeStack(1, 1);
+
+            entity.setStack(2, new ItemStack(ItemManager.MARY_COIN_ITEM,
+                    entity.getStack(2).getCount() + 1));
+
+            entity.resetProgress();
+        }
     }
 
-    @Override
-    public void setExperienceFromServer(int experience) {
+    private static boolean hasRecipe(CandyMachineEntity entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        boolean hasRawGemInFirstSlot = entity.getStack(1).getItem() == ItemManager.MARY_COIN_ITEM;
+
+        return hasRawGemInFirstSlot && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, ItemManager.MARY_COIN_ITEM);
     }
 
-    @Override
-    public boolean isLeveledMerchant() {
-        return false;
+    private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {
+        return inventory.getStack(2).getItem() == output || inventory.getStack(2).isEmpty();
     }
 
-    @Override
-    public SoundEvent getYesSound() {
-        return SoundEvents.ENTITY_PLAYER_LEVELUP;
+    private static boolean canInsertAmountIntoOutputSlot(SimpleInventory inventory) {
+        return inventory.getStack(2).getMaxCount() > inventory.getStack(2).getCount();
     }
-
-    @Override
-    public boolean isClient() {
-        assert this.world != null;
-        return this.world.isClient;
-    }
-
 }

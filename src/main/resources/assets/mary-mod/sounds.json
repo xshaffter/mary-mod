@@ -1,0 +1,12 @@
+{
+  "beagle_bark": {
+    "sounds": [
+      "mary-mod:beagle_bark"
+    ]
+  },
+  "fansa_intro": {
+    "sounds": [
+      "mary-mod:fansa"
+    ]
+  }
+}

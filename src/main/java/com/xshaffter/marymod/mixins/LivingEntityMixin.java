@@ -1,5 +1,6 @@
 package com.xshaffter.marymod.mixins;
 
+import com.xshaffter.marymod.events.AdvancementManager;
 import com.xshaffter.marymod.items.totems.NormalTotem;
 import com.xshaffter.marymod.util.IEntityDataSaver;
 import com.xshaffter.marymod.util.LivingEntityBridge;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -39,7 +41,7 @@ public abstract class LivingEntityMixin extends Entity implements IEntityDataSav
             callback.cancel();
         }
         //noinspection ConstantValue
-        if (((Entity)this) instanceof PlayerEntity player) {
+        if (((Entity)this) instanceof ServerPlayerEntity player) {
             var totem_item = new NormalTotem();
             totem_item.performResurrection(this);
             totem_item.postRevive(this);
@@ -47,6 +49,7 @@ public abstract class LivingEntityMixin extends Entity implements IEntityDataSav
             if (isFirstDead()) {
                 this.getPersistentData().putBoolean("firstDead", false);
                 player.sendMessage(Text.literal("¿Qué? ¿enserio creíste que te dejaríamos morir?"));
+                AdvancementManager.grantAdvancement(player, "undying");
             }
         }
 

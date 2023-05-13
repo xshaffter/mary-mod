@@ -1,10 +1,14 @@
 package com.xshaffter.marymod.blocks.custom;
 
 import com.xshaffter.marymod.blocks.bases.RotableBlock;
+import com.xshaffter.marymod.blocks.bases.RotableBlockWithEntity;
+import com.xshaffter.marymod.blocks.entities.BlockEntityManager;
 import com.xshaffter.marymod.blocks.entities.CandyMachineEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -20,6 +24,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,7 +33,7 @@ import static com.xshaffter.marymod.items.ItemManager.MARY_COIN_ITEM;
 
 
 @SuppressWarnings("deprecation")
-public class CandyMachine extends RotableBlock implements BlockEntityProvider {
+public class CandyMachine extends RotableBlockWithEntity implements BlockEntityProvider {
 
     public CandyMachine() {
         super(FabricBlockSettings.of(Material.METAL)
@@ -41,14 +46,12 @@ public class CandyMachine extends RotableBlock implements BlockEntityProvider {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient)
-        {
-            if (!state.get(Properties.BOTTOM)) {
-                pos = pos.down();
+        if (!world.isClient) {
+            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+
+            if (screenHandlerFactory != null) {
+                player.openHandledScreen(screenHandlerFactory);
             }
-            BlockEntity te = world.getBlockEntity(pos);
-            if (te instanceof CandyMachineEntity)
-                ((CandyMachineEntity) te).openGui(player);
         }
         return ActionResult.SUCCESS;
     }
@@ -72,5 +75,16 @@ public class CandyMachine extends RotableBlock implements BlockEntityProvider {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.4f, 1f);
 
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(type, BlockEntityManager.CANDY_MACHINE_ENTITY, CandyMachineEntity::tick);
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 }

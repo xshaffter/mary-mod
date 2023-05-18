@@ -1,7 +1,9 @@
 package com.xshaffter.marymod;
 
 import com.xshaffter.marymod.blocks.BlockManager;
+import com.xshaffter.marymod.events.KeyboardHandler;
 import com.xshaffter.marymod.events.ReplaceScreens;
+import com.xshaffter.marymod.networking.NetworkManager;
 import com.xshaffter.marymod.screens.CandyMachineScreen;
 import com.xshaffter.marymod.screens.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
@@ -25,9 +27,15 @@ public class MaryModClient implements ClientModInitializer {
 
         ScreenEvents.BEFORE_INIT.register(new ReplaceScreens());
         HandledScreens.register(ModScreenHandlers.CANDY_MACHINE_SCREEN_HANDLER, CandyMachineScreen::new);
+        NetworkManager.registerS2CPackets();
+        KeyboardHandler.register();
     }
 
     public static Path getClientPath() {
         return FabricLoader.getInstance().getGameDir();
+    }
+
+    public static String getModVersion() {
+        return "1.2";
     }
 }

@@ -4,7 +4,7 @@
 		"2": "mary-mod:item/crown/gema2",
 		"3": "mary-mod:item/crown/tiara",
 		"4": "mary-mod:item/crown/gema1",
-		"particle": "gema1"
+		"particle": "mary-mod:item/crown/gema1"
 	},
 	"elements": [
 		{

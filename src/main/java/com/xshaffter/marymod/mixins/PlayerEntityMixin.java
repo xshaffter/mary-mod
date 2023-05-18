@@ -36,6 +36,14 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private String getNameString() {
         return getNameText().string();
     }
+    private String getTeamName() {
+        var team = this.getScoreboardTeam();
+        if (team != null) {
+            return this.getScoreboardTeam().getName();
+        } else {
+            return "";
+        }
+    }
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -43,7 +51,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "isBlockBreakingRestricted", cancellable = true)
     public void isBlockBreakingRestrictedForMary(World world, BlockPos pos, GameMode gameMode, CallbackInfoReturnable<Boolean> cir) {
-        if (getNameString().equalsIgnoreCase("maryblog")) {
+        if (getNameString().equalsIgnoreCase("maryblog") || this.getTeamName().equalsIgnoreCase("people")) {
             cir.setReturnValue(true);
         } else {
             cir.cancel();

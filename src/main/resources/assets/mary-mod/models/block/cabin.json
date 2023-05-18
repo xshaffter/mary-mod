@@ -6,7 +6,7 @@
 		"1": "mary-mod:block/cabin/letrero",
 		"2": "mary-mod:block/cabin/cabina2",
 		"3": "mary-mod:block/cabin/cartel",
-		"particle": "cabina"
+		"particle": "mary-mod:block/cabin/cabina"
 	},
 	"elements": [
 		{

@@ -2,11 +2,12 @@ package com.xshaffter.marymod.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.xshaffter.marymod.MaryMod;
+import com.xshaffter.marymod.MaryModClient;
 import com.xshaffter.marymod.mixins.ScreenMixin;
 import com.xshaffter.marymod.mixins.TitleScreenMixin;
+import com.xshaffter.marymod.screens.components.PlayButtonWidget;
 import com.xshaffter.marymod.updater.ResourceDownloader;
 import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ConnectScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -18,7 +19,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class NewTitleScreen extends TitleScreen {
@@ -36,11 +36,13 @@ public class NewTitleScreen extends TitleScreen {
         int height = this.height;
         if (!MaryMod.DEBUG) {
             int y = height / 4 + 48;
-            int spacingY = 24;
-            var playBtn = new ButtonWidget(width / 2 - 100, y + spacingY, 200, 20, Text.literal("Jugar"), button -> {
+            int buttonHeight = 20;
+            int Vgap = 4;
+            int spacingY = buttonHeight + Vgap;
+            var playBtn = new PlayButtonWidget(width / 2 - 100, y + spacingY, 200, 20, button -> {
                 assert NewTitleScreen.this.client != null;
                 ConnectScreen.connect(NewTitleScreen.this, NewTitleScreen.this.client, ServerAddress.parse(serverEntry.address), serverEntry);
-            }, ButtonWidget.EMPTY);
+            });
 
 
             var updateBtn = new ButtonWidget(width / 2 - 100, y + spacingY * 2, 200, 20, Text.literal("Actualizar (WIP)"), button -> {
@@ -61,14 +63,14 @@ public class NewTitleScreen extends TitleScreen {
 
         drawCustomTitleScreen(matrixStack, width, height);
         drawMinecraftLogo(matrixStack);
-        drawCopyrightNotice(matrixStack, width, height);
+        drawCopyrightNotice(matrixStack);
         drawTitleScreenButtons(matrixStack, mouseX, mouseY, partialTicks);
     }
 
-    private void drawCopyrightNotice(MatrixStack matrixStack, int width, int height) {
+    private void drawCopyrightNotice(MatrixStack matrixStack) {
         assert this.client != null;
-        var text = "Copyright Mojang AB. Do not distribute!";
-        drawStringWithShadow(matrixStack, this.client.textRenderer, text, width - this.textRenderer.getWidth(text) - 2, height - 10, 0xFFFFFFFF);
+        var text = "MaryMod %s".formatted(MaryModClient.getModVersion());
+        drawStringWithShadow(matrixStack, this.client.textRenderer, text, 2, 2, 0xFFFFFFFF);
     }
 
 

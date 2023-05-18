@@ -18,6 +18,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -40,18 +41,18 @@ public class CandyMachine extends RotableBlockWithEntity implements BlockEntityP
                 .nonOpaque()
                 .collidable(true)
                 .hardness(10f)
-                .strength(40f)
+                .strength(40f),
+                VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.4f, 1f)
         );
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            NamedScreenHandlerFactory screenHandlerFactory = (NamedScreenHandlerFactory) world.getBlockEntity(pos);
+            player.openHandledScreen(screenHandlerFactory);
 
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
-            }
+            return ActionResult.CONSUME;
         }
         return ActionResult.SUCCESS;
     }
@@ -63,18 +64,14 @@ public class CandyMachine extends RotableBlockWithEntity implements BlockEntityP
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        // super.onStateReplaced(state, world, pos, newState, moved);
-    }
-
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.4f, 1f);
-    }
-
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.4f, 1f);
-
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof CandyMachineEntity) {
+                ItemScatterer.spawn(world, pos, (CandyMachineEntity)blockEntity);
+                world.updateComparators(pos,this);
+            }
+            super.onStateReplaced(state, world, pos, newState, moved);
+        }
     }
 
     @Nullable

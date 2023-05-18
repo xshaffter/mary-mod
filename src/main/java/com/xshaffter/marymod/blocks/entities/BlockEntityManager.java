@@ -13,6 +13,6 @@ public class BlockEntityManager {
 
     public static void registerEntities() {
         CANDY_MACHINE_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MaryMod.MOD_ID, "candy_machine_entity"),
-                FabricBlockEntityTypeBuilder.create(CandyMachineEntity::new, BlockManager.CANDY_MACHINE).build());
+                FabricBlockEntityTypeBuilder.create(CandyMachineEntity::new, BlockManager.CANDY_MACHINE).build(null));
     }
 }

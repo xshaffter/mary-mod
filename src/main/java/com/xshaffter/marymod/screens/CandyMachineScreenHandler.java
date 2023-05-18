@@ -18,7 +18,6 @@ import net.minecraft.screen.slot.Slot;
 public class CandyMachineScreenHandler extends ScreenHandler {
     public static final int INPUT_SLOT = 0;
     public static final int OUTPUT_SLOT = 1;
-    private final PropertyDelegate propertyDelegate;
     private final CandyMachineSubHandler subHandler;
 
     public CandyMachineScreenHandler(int syncId, PlayerInventory inventory) {
@@ -36,8 +35,6 @@ public class CandyMachineScreenHandler extends ScreenHandler {
             subHandler = new CandyMachineSubHandler(this, frontInventory, playerInventory.player);
             addFrontSlots();
         }
-
-        this.propertyDelegate = delegate;
 
         addProperties(delegate);
     }

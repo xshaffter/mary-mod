@@ -27,6 +27,7 @@ public class NewTitleScreen extends TitleScreen {
     public static final Identifier MINECRAFT_TITLE_TEXTURE = new Identifier(MaryMod.MOD_ID, "textures/gui/title/marycraft_logo.png");
 
     private final ServerInfo serverEntry = new ServerInfo(I18n.translate("selectServer.defaultName"), "54.39.26.111:25583", false);
+    private final ServerInfo localEntry = new ServerInfo(I18n.translate("selectServer.defaultName"), "localhost", false);
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
@@ -34,18 +35,17 @@ public class NewTitleScreen extends TitleScreen {
         ((TitleScreenMixin) this).setSplashText("");
         int width = this.width;
         int height = this.height;
+        int y = height / 4 + 48;
+        int buttonHeight = 20;
+        int Vgap = 4;
+        int spacingY = buttonHeight + Vgap;
         if (!MaryMod.DEBUG) {
-            int y = height / 4 + 48;
-            int buttonHeight = 20;
-            int Vgap = 4;
-            int spacingY = buttonHeight + Vgap;
             var playBtn = new PlayButtonWidget(width / 2 - 100, y + spacingY, 200, 20, button -> {
                 assert NewTitleScreen.this.client != null;
                 ConnectScreen.connect(NewTitleScreen.this, NewTitleScreen.this.client, ServerAddress.parse(serverEntry.address), serverEntry);
             });
 
-
-            var updateBtn = new ButtonWidget(width / 2 - 100, y + spacingY * 2, 200, 20, Text.literal("Actualizar (WIP)"), button -> {
+            var updateBtn = new ButtonWidget(width / 2 - 100, y + spacingY * 2, 200, 20, Text.literal("Actualizar"), button -> {
                 var downloader = new ResourceDownloader();
                 try {
                     downloader.CheckModpackVersion();
@@ -59,6 +59,12 @@ public class NewTitleScreen extends TitleScreen {
 
             this.addDrawableChild(playBtn);
             this.addDrawableChild(updateBtn);
+        } else {
+            var playBtn = new PlayButtonWidget(width / 2 - 100, y + spacingY, 200, 20, button -> {
+                assert NewTitleScreen.this.client != null;
+                ConnectScreen.connect(NewTitleScreen.this, NewTitleScreen.this.client, ServerAddress.parse(localEntry.address), localEntry);
+            });
+            this.addDrawableChild(playBtn);
         }
 
         drawCustomTitleScreen(matrixStack, width, height);

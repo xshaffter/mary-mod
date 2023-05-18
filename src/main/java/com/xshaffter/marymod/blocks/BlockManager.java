@@ -1,19 +1,23 @@
 package com.xshaffter.marymod.blocks;
 
 import com.xshaffter.marymod.MaryMod;
+import com.xshaffter.marymod.blocks.bases.OnActionBlock;
 import com.xshaffter.marymod.blocks.bases.UsableTextBlock;
 import com.xshaffter.marymod.blocks.custom.CandyMachine;
 import com.xshaffter.marymod.blocks.custom.MaryBlue;
 import com.xshaffter.marymod.blocks.custom.MaryCoin;
 import com.xshaffter.marymod.blocks.custom.PoroGalleta;
+import com.xshaffter.marymod.events.AdvancementManager;
 import com.xshaffter.marymod.items.ItemGroups;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShapes;
@@ -47,7 +51,7 @@ public class BlockManager {
                     .strength(4f)
                     .hardness(1f),
             Text.literal("Creo que no quiero streamer de momento"),
-            VoxelShapes.cuboid(-1f, 0f, 0f, 1.7f, 1f, 1f)
+            VoxelShapes.cuboid(-0.7f, 0f, 0f, 2f, 1f, 1f)
     );
     public static final Block MONITOR = new UsableTextBlock(
             FabricBlockSettings.of(Material.METAL)
@@ -56,7 +60,7 @@ public class BlockManager {
                     .strength(4f)
                     .hardness(1f),
             Text.literal("Mi pequeño setup"),
-            VoxelShapes.cuboid(0f, 0f, 0f, 2f, 1f, 1f)
+            VoxelShapes.cuboid(-1f, 0f, 0f, 1f, 1f, 1f)
     );
 
     public static final Block PAINT_SHELF = new UsableTextBlock(
@@ -86,6 +90,40 @@ public class BlockManager {
                     .hardness(1f)
     );
 
+    public static final Block CAKE = new UsableTextBlock(
+            Text.literal("Feliz cumpleaños!"),
+            FabricBlockSettings.of(Material.CAKE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.WOOL)
+                    .strength(4f)
+                    .hardness(1f)
+    );
+
+    public static final Block CABIN = new UsableTextBlock(
+            FabricBlockSettings.of(Material.CAKE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.WOOL)
+                    .strength(4f)
+                    .hardness(1f),
+            Text.literal("Feliz cumpleaños!"),
+            VoxelShapes.cuboid(-1f, -1f, -1f, 2f, 2f, 2f)
+    );
+
+    public static final Block ALARM = new OnActionBlock(
+            FabricBlockSettings.of(Material.METAL)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.STONE)
+                    .strength(4f)
+                    .hardness(1f),
+            VoxelShapes.cuboid(0.3f,0f,0.35f,0.7f,0.2f,0.55f),
+            (state, world, pos, player, hand, hit) -> {
+                if (!world.isClient) {
+                    AdvancementManager.grantAdvancement((ServerPlayerEntity) player, "morning");
+                }
+                return ActionResult.SUCCESS;
+            }
+    );
+
     private static void registerBlock(final String name, final Block block, final BlockItem blockItem) {
         Registry.register(Registry.BLOCK, new Identifier(MaryMod.MOD_ID, name), block);
         registerBlockItem(name, blockItem);
@@ -112,5 +150,8 @@ public class BlockManager {
         registerBlockAuto("paint_shelf", PAINT_SHELF);
         registerBlockAuto("easel", EASEL);
         registerBlockAuto("tomb", TOMB);
+        registerBlockAuto("alarm", ALARM);
+        registerBlockAuto("cake", CAKE);
+        registerBlockAuto("cabin", CABIN);
     }
 }

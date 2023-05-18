@@ -14,16 +14,19 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
 
-public class UsableTextBlock extends RotableBlock {
-    private final Text text;
-
+public class UsableTextBlock extends OnActionBlock {
     public UsableTextBlock(Settings settings, Text text) {
-        super(settings, VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1f, 1f));
-        this.text = text;
+        this(settings, text, VoxelShapes.cuboid(0, 0, 0, 1, 1, 1));
     }
+
     public UsableTextBlock(Settings settings, Text text, VoxelShape shape) {
-        super(settings, shape);
-        this.text = text;
+        super(settings, shape, (state, world, pos, player, hand, hit) -> {
+            if (!world.isClient) {
+                return ActionResult.PASS;
+            }
+            player.sendMessage(text);
+            return ActionResult.SUCCESS;
+        });
     }
 
     public UsableTextBlock(Material material, BlockSoundGroup sound, Text text, VoxelShape shape) {
@@ -47,18 +50,6 @@ public class UsableTextBlock extends RotableBlock {
     }
 
     public UsableTextBlock(Text text, Settings settings) {
-        this(settings, text,
-                VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1f, 1f)
-        );
-    }
-
-
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            return ActionResult.PASS;
-        }
-        player.sendMessage(text);
-        return ActionResult.SUCCESS;
+        this(settings, text, VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1f, 1f));
     }
 }

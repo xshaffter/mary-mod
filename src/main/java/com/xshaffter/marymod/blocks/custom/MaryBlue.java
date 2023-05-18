@@ -20,13 +20,6 @@ public class MaryBlue extends RotableBlock implements Collectible {
                 .sounds(BlockSoundGroup.WOOL)
                 .strength(4f)
                 .hardness(1f)
-                .collidable(false));
+                .collidable(false), VoxelShapes.cuboid(0.3f, 0f, 0.3f, 0.7f, 0.5f, 0.7f));
     }
-
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(0.3f, 0f, 0.3f, 0.7f, 0.5f, 0.7f);
-
-    }
-
 }

@@ -13,16 +13,13 @@ import net.minecraft.world.BlockView;
 public class MaryCoin extends UseBreakBlock {
     public MaryCoin() {
         super(FabricBlockSettings.of(Material.METAL)
-                .nonOpaque()
-                .hardness(50f)
-                .strength(50f)
-                .collidable(false));
+                        .nonOpaque()
+                        .hardness(50f)
+                        .strength(50f)
+                        .collidable(false),
+                VoxelShapes.cuboid(0.2f, 0f, 0.2f, 0.8f, 0.1f, 0.8f)
+        );
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(0.2f, 0f, 0.2f, 0.8f, 0.1f, 0.8f);
-    }
 
 }

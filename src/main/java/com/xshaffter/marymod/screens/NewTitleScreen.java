@@ -18,6 +18,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class NewTitleScreen extends TitleScreen {
@@ -33,29 +34,30 @@ public class NewTitleScreen extends TitleScreen {
         ((TitleScreenMixin) this).setSplashText("");
         int width = this.width;
         int height = this.height;
-
-        int y = height / 4 + 48;
-        int spacingY = 24;
-        var playBtn = new ButtonWidget(width / 2 - 100, y + spacingY, 200, 20, Text.literal("Jugar"), button -> {
-            assert NewTitleScreen.this.client != null;
-            ConnectScreen.connect(NewTitleScreen.this, NewTitleScreen.this.client, ServerAddress.parse(serverEntry.address), serverEntry);
-        }, ButtonWidget.EMPTY);
-
-
-        var updateBtn = new ButtonWidget(width / 2 - 100, y + spacingY * 2, 200, 20, Text.literal("Actualizar (WIP)"), button -> {
-            var downloader = new ResourceDownloader();
-            try {
-                downloader.CheckModpackVersion();
-                assert this.client != null;
-                this.client.setScreen(new RestartGameScreen());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }, ButtonWidget.EMPTY);
+        if (!MaryMod.DEBUG) {
+            int y = height / 4 + 48;
+            int spacingY = 24;
+            var playBtn = new ButtonWidget(width / 2 - 100, y + spacingY, 200, 20, Text.literal("Jugar"), button -> {
+                assert NewTitleScreen.this.client != null;
+                ConnectScreen.connect(NewTitleScreen.this, NewTitleScreen.this.client, ServerAddress.parse(serverEntry.address), serverEntry);
+            }, ButtonWidget.EMPTY);
 
 
-        this.addDrawableChild(playBtn);
-        this.addDrawableChild(updateBtn);
+            var updateBtn = new ButtonWidget(width / 2 - 100, y + spacingY * 2, 200, 20, Text.literal("Actualizar (WIP)"), button -> {
+                var downloader = new ResourceDownloader();
+                try {
+                    downloader.CheckModpackVersion();
+                    assert this.client != null;
+                    this.client.setScreen(new RestartGameScreen());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }, ButtonWidget.EMPTY);
+
+
+            this.addDrawableChild(playBtn);
+            this.addDrawableChild(updateBtn);
+        }
 
         drawCustomTitleScreen(matrixStack, width, height);
         drawMinecraftLogo(matrixStack);
@@ -102,7 +104,7 @@ public class NewTitleScreen extends TitleScreen {
 
     private boolean isPlayBtn(ButtonWidget button) {
         return button.getMessage().toString().equals("translation{key='menu.multiplayer', args=[]}") ||
-                button.getMessage().toString().equals("translation{key='menu.online', args=[]}")/* ||
-                button.getMessage().toString().equals("translation{key='menu.singleplayer', args=[]}")*/;
+                button.getMessage().toString().equals("translation{key='menu.online', args=[]}") ||
+                (!MaryMod.DEBUG && button.getMessage().toString().equals("translation{key='menu.singleplayer', args=[]}"));
     }
 }

@@ -14,6 +14,7 @@ public class MaryMod implements ModInitializer {
 
     public static final String MOD_ID = "mary-mod";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+    public static final boolean DEBUG = true;
 
     @Override
     public void onInitialize() {

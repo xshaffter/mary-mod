@@ -1,5 +1,7 @@
 package com.xshaffter.marymod.blocks.bases;
 
+import com.google.common.collect.ImmutableMap;
+import com.xshaffter.marymod.util.VoxelShapeUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -11,20 +13,25 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
+
 public abstract class RotableBlock extends HorizontalFacingBlock {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-    private VoxelShape shape;
+    private final VoxelShape northShape;
 
     protected RotableBlock(Settings settings) {
-        super(settings);
+        this(settings, VoxelShapes.fullCube());
     }
+
     protected RotableBlock(Settings settings, VoxelShape shape) {
         super(settings);
-        this.shape = shape;
+        this.northShape = shape;
     }
 
     @Nullable
@@ -50,6 +57,16 @@ public abstract class RotableBlock extends HorizontalFacingBlock {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return this.shape;
+        return VoxelShapeUtil.rotateShape(Direction.NORTH, state.get(FACING), northShape);
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapeUtil.rotateShape(Direction.NORTH, state.get(FACING), northShape);
+    }
+
+    @Override
+    protected ImmutableMap<BlockState, VoxelShape> getShapesForStates(Function<BlockState, VoxelShape> stateToShape) {
+        return this.stateManager.getStates().stream().collect(ImmutableMap.toImmutableMap(Function.identity(), (state) -> VoxelShapeUtil.rotateShape(Direction.NORTH, state.get(FACING), northShape)));
     }
 }

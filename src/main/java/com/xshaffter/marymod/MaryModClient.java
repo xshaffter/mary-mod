@@ -9,13 +9,17 @@ import com.xshaffter.marymod.screens.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.Version;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 
+import java.io.FileInputStream;
 import java.nio.file.Path;
+import java.util.Properties;
 
 @Environment(EnvType.CLIENT)
 public class MaryModClient implements ClientModInitializer {
@@ -36,6 +40,6 @@ public class MaryModClient implements ClientModInitializer {
     }
 
     public static String getModVersion() {
-        return "1.2";
+        return "1.3";
     }
 }

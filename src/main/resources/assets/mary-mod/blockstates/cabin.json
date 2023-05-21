@@ -1,19 +1,148 @@
 {
   "variants": {
-    "facing=north": {
-      "model": "mary-mod:block/cabin"
+    "king_pos=top_center": {
+      "model": "mary-mod:block/cabin/render/cabin_top_center"
     },
-    "facing=east": {
-      "model": "mary-mod:block/cabin",
-      "y": 90
+    "king_pos=north_top": {
+      "model": "mary-mod:block/cabin/render/cabin_top_arist"
     },
-    "facing=south": {
-      "model": "mary-mod:block/cabin",
+    "king_pos=south_top": {
+      "model": "mary-mod:block/cabin/render/cabin_top_arist",
       "y": 180
     },
-    "facing=west": {
-      "model": "mary-mod:block/cabin",
+    "king_pos=east_top": {
+      "model": "mary-mod:block/cabin/render/cabin_top_arist",
+      "y": 90
+    },
+    "king_pos=west_top": {
+      "model": "mary-mod:block/cabin/render/cabin_top_arist",
       "y": 270
+    },
+    "king_pos=north_east_top": {
+      "model": "mary-mod:block/cabin/render/cabin_top_vertex",
+      "y": 90
+    },
+    "king_pos=north_west_top": {
+      "model": "mary-mod:block/cabin/render/cabin_top_vertex"
+    },
+    "king_pos=south_east_top": {
+      "model": "mary-mod:block/cabin/render/cabin_top_vertex",
+      "y": 180
+    },
+    "king_pos=south_west_top": {
+      "model": "mary-mod:block/cabin/render/cabin_top_vertex",
+      "y": 270
+    },
+    "king_pos=center": {
+      "model": "minecraft:block/barrier"
+    },
+    "facing=north,king_pos=north_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist_note"
+    },
+    "facing=south,king_pos=south_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist_note",
+      "y": 180
+    },
+    "facing=east,king_pos=east_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist_note",
+      "y": 90
+    },
+    "facing=west,king_pos=west_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist_note",
+      "y": 270
+    },
+    "king_pos=north_east_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_vertex"
+    },
+    "king_pos=north_west_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_vertex",
+      "y": 270
+    },
+    "king_pos=south_east_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_vertex",
+      "y": 90
+    },
+    "king_pos=south_west_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_vertex",
+      "y": 180
+    },
+    "king_pos=bottom_center": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_center"
+    },
+    "king_pos=north_bottom": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_arist"
+    },
+    "king_pos=south_bottom": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_arist",
+      "y": 180
+    },
+    "king_pos=east_bottom": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_arist",
+      "y": 90
+    },
+    "king_pos=west_bottom": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_arist",
+      "y": 270
+    },
+    "king_pos=north_east_bottom": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_vertex"
+    },
+    "king_pos=north_west_bottom": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_vertex",
+      "y": 270
+    },
+    "king_pos=south_east_bottom": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_vertex",
+      "y": 90
+    },
+    "king_pos=south_west_bottom": {
+      "model": "mary-mod:block/cabin/render/cabin_bottom_vertex",
+      "y": 180
+    },
+    "facing=south,king_pos=north_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist"
+    },
+    "facing=east,king_pos=north_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist"
+    },
+    "facing=west,king_pos=north_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist"
+    },
+    "facing=north,king_pos=south_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 180
+    },
+    "facing=east,king_pos=south_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 180
+    },
+    "facing=west,king_pos=south_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 180
+    },
+    "facing=north,king_pos=west_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 270
+    },
+    "facing=east,king_pos=west_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 270
+    },
+    "facing=south,king_pos=west_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 270
+    },
+    "facing=north,king_pos=east_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 90
+    },
+    "facing=south,king_pos=east_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 90
+    },
+    "facing=west,king_pos=east_mid": {
+      "model": "mary-mod:block/cabin/render/cabin_mid_arist",
+      "y": 90
     }
   }
 }

@@ -1,6 +1,7 @@
 package com.xshaffter.marymod.networking.packets;
 
 import com.xshaffter.marymod.events.SoundManager;
+import com.xshaffter.marymod.util.PlayerEntityBridge;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
@@ -14,6 +15,8 @@ public class BarkC2SPacket {
                                PacketByteBuf buf, PacketSender responseSender) {
         // Everything here happens ONLY on the Server!
         ServerWorld world = player.getWorld();
-        world.playSound(null, player.getBlockPos(), SoundManager.BEAGLE_BARK, SoundCategory.PLAYERS, 1f, 1f);
+        if (PlayerEntityBridge.getTeam(player).equalsIgnoreCase("administrator")) {
+            world.playSound(null, player.getBlockPos(), SoundManager.BEAGLE_BARK, SoundCategory.PLAYERS, 1f, 1f);
+        }
     }
 }

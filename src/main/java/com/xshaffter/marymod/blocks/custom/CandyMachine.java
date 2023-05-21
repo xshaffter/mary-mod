@@ -10,10 +10,13 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -38,10 +41,10 @@ public class CandyMachine extends RotableBlockWithEntity implements BlockEntityP
 
     public CandyMachine() {
         super(FabricBlockSettings.of(Material.METAL)
-                .nonOpaque()
-                .collidable(true)
-                .hardness(10f)
-                .strength(40f),
+                        .nonOpaque()
+                        .collidable(true)
+                        .hardness(10f)
+                        .strength(40f),
                 VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.4f, 1f)
         );
     }
@@ -67,8 +70,8 @@ public class CandyMachine extends RotableBlockWithEntity implements BlockEntityP
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof CandyMachineEntity) {
-                ItemScatterer.spawn(world, pos, (CandyMachineEntity)blockEntity);
-                world.updateComparators(pos,this);
+                ItemScatterer.spawn(world, pos, (CandyMachineEntity) blockEntity);
+                world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }

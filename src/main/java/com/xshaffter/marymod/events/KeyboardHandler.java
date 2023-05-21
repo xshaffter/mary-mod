@@ -11,12 +11,17 @@ import org.lwjgl.glfw.GLFW;
 public class KeyboardHandler {
     public static final String KEY_CATEGORY_MARY_MOD = "key.category.mary-mod";
     public static final String KEY_BEAGLE_BARK = "key.mary-mod.bark";
+    public static final String KEY_OPEN_ACTIONS = "key.mary-mod.actions";
 
     public static KeyBinding barkKey;
+    public static KeyBinding openActionsKey;
 
     private static void registerKeyInputs() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if(barkKey.wasPressed()) {
+                ClientPlayNetworking.send(NetworkManager.BARK_ID, PacketByteBufs.create());
+            }
+            if(openActionsKey.wasPressed()) {
                 ClientPlayNetworking.send(NetworkManager.BARK_ID, PacketByteBufs.create());
             }
         });
@@ -27,6 +32,12 @@ public class KeyboardHandler {
                 KEY_BEAGLE_BARK,
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_B,
+                KEY_CATEGORY_MARY_MOD
+        ));
+        barkKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                KEY_OPEN_ACTIONS,
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_APOSTROPHE,
                 KEY_CATEGORY_MARY_MOD
         ));
 

@@ -3,6 +3,8 @@ package com.xshaffter.marymod.mixins;
 import com.xshaffter.marymod.MaryMod;
 import com.xshaffter.marymod.MaryModClient;
 import com.xshaffter.marymod.items.totems.NormalTotem;
+import com.xshaffter.marymod.util.IPlayerFunctions;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,22 +23,29 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
+public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerFunctions {
 
-    @Shadow public abstract Text getName();
+    @Shadow
+    public abstract Text getName();
 
-    @Shadow public abstract Text getDisplayName();
+    @Shadow
+    public abstract Text getDisplayName();
+
+    @Shadow public abstract boolean canHarvest(BlockState state);
 
     private MutableText getNameAsMutable() {
         return (MutableText) this.getName();
     }
+
     private LiteralTextContent getNameText() {
         return (LiteralTextContent) getNameAsMutable().getContent();
     }
-    private String getNameString() {
+
+    public String getNameString() {
         return getNameText().string();
     }
-    private String getTeamName() {
+
+    public String getTeamName() {
         var team = this.getScoreboardTeam();
         if (team != null) {
             return this.getScoreboardTeam().getName();
@@ -51,6 +60,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "isBlockBreakingRestricted", cancellable = true)
     public void isBlockBreakingRestrictedForMary(World world, BlockPos pos, GameMode gameMode, CallbackInfoReturnable<Boolean> cir) {
+        if (this.canHarvest(world.getBlockState(pos))) {
+            cir.cancel();
+        }
+
         if (getNameString().equalsIgnoreCase("maryblog") || this.getTeamName().equalsIgnoreCase("people")) {
             cir.setReturnValue(true);
         } else {

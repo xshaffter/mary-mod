@@ -3,10 +3,7 @@ package com.xshaffter.marymod.blocks;
 import com.xshaffter.marymod.MaryMod;
 import com.xshaffter.marymod.blocks.bases.OnActionBlock;
 import com.xshaffter.marymod.blocks.bases.UsableTextBlock;
-import com.xshaffter.marymod.blocks.custom.CandyMachine;
-import com.xshaffter.marymod.blocks.custom.MaryBlue;
-import com.xshaffter.marymod.blocks.custom.MaryCoin;
-import com.xshaffter.marymod.blocks.custom.PoroGalleta;
+import com.xshaffter.marymod.blocks.custom.*;
 import com.xshaffter.marymod.events.AdvancementManager;
 import com.xshaffter.marymod.items.ItemGroups;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -99,15 +96,7 @@ public class BlockManager {
                     .hardness(1f)
     );
 
-    public static final Block CABIN = new UsableTextBlock(
-            FabricBlockSettings.of(Material.CAKE)
-                    .nonOpaque()
-                    .sounds(BlockSoundGroup.WOOL)
-                    .strength(4f)
-                    .hardness(1f),
-            Text.literal("Feliz cumpleaños!"),
-            VoxelShapes.cuboid(-1f, -1f, -1f, 2f, 2f, 2f)
-    );
+    public static final Block CABIN = new PoliceCabin();
 
     public static final Block ALARM = new OnActionBlock(
             FabricBlockSettings.of(Material.METAL)
@@ -138,6 +127,8 @@ public class BlockManager {
     }
 
     public static void registerModBlocks() {
+
+        //TODO: cabina, maquina dulces, escritorio, monitores, pastel
         registerBlockAuto("mary_blue", MARY_BLUE);
         registerBlockAuto("mary_coin", MARY_COIN);
         registerBlockAuto("poro_galletas", PORO_GALLETA);

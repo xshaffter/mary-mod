@@ -1,32 +1,21 @@
 package com.xshaffter.marymod.blocks.entities;
 
-import com.xshaffter.marymod.MaryMod;
-import com.xshaffter.marymod.blocks.BlockManager;
 import com.xshaffter.marymod.items.ItemManager;
-import com.xshaffter.marymod.screens.CandyMachineScreenHandler;
+import com.xshaffter.marymod.screens.handlers.CandyMachineScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.Nameable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.village.Merchant;
-import net.minecraft.village.TradeOffer;
-import net.minecraft.village.TradeOfferList;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,4 +1,4 @@
-package com.xshaffter.marymod.screens;
+package com.xshaffter.marymod.screens.handlers;
 
 import com.xshaffter.marymod.blocks.entities.CandyMachineEntity;
 import com.xshaffter.marymod.blocks.entities.TradeInventory;
@@ -29,10 +29,10 @@ public class CandyMachineScreenHandler extends ScreenHandler {
         checkSize(frontInventory, CandyMachineEntity.FRONT_SIZE);
         checkSize(chestInventory, TradeInventory.CHEST_SIZE);
         if (playerInventory.player.isCreative()) {
-            subHandler = new CandyMachineSubHandler(this, chestInventory, playerInventory.player);
+            subHandler = new CandyMachineSubHandler(this, chestInventory, playerInventory.player, 84);
             addChestSlots();
         } else {
-            subHandler = new CandyMachineSubHandler(this, frontInventory, playerInventory.player);
+            subHandler = new CandyMachineSubHandler(this, frontInventory, playerInventory.player, 86);
             addFrontSlots();
         }
 

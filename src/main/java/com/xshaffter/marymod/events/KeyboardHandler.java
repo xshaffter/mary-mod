@@ -22,7 +22,7 @@ public class KeyboardHandler {
                 ClientPlayNetworking.send(NetworkManager.BARK_ID, PacketByteBufs.create());
             }
             if(openActionsKey.wasPressed()) {
-                ClientPlayNetworking.send(NetworkManager.BARK_ID, PacketByteBufs.create());
+                ClientPlayNetworking.send(NetworkManager.OPEN_ACTIONS_ID, PacketByteBufs.create());
             }
         });
     }
@@ -34,7 +34,7 @@ public class KeyboardHandler {
                 GLFW.GLFW_KEY_B,
                 KEY_CATEGORY_MARY_MOD
         ));
-        barkKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        openActionsKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 KEY_OPEN_ACTIONS,
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_APOSTROPHE,

@@ -6,7 +6,7 @@ import com.xshaffter.marymod.events.AdvancementManager;
 import com.xshaffter.marymod.events.SoundManager;
 import com.xshaffter.marymod.items.ItemManager;
 import com.xshaffter.marymod.networking.NetworkManager;
-import com.xshaffter.marymod.screens.ModScreenHandlers;
+import com.xshaffter.marymod.screens.handlers.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;

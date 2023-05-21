@@ -1,6 +1,6 @@
 package com.xshaffter.marymod.screens.subhandlers;
 
-import com.xshaffter.marymod.screens.CandyMachineScreenHandler;
+import com.xshaffter.marymod.screens.handlers.CandyMachineScreenHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -10,11 +10,13 @@ import net.minecraft.screen.slot.Slot;
 public class CandyMachineSubHandler {
     private final CandyMachineScreenHandler screen;
     public final Inventory inventory;
+    private final int MARGIN;
 
-    public CandyMachineSubHandler(CandyMachineScreenHandler screen, Inventory inventory, PlayerEntity player) {
+    public CandyMachineSubHandler(CandyMachineScreenHandler screen, Inventory inventory, PlayerEntity player, int margin) {
         this.screen = screen;
         this.inventory = inventory;
         inventory.onOpen(player);
+        MARGIN = margin;
         addPlayerInventory(player.getInventory());
         addPlayerHotbar(player.getInventory());
     }
@@ -23,7 +25,7 @@ public class CandyMachineSubHandler {
     private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                screen.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                screen.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, MARGIN + i * 18));
             }
         }
     }

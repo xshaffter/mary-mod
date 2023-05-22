@@ -42,7 +42,8 @@ public abstract class LivingEntityMixin extends Entity implements IEntityDataSav
     public void useCustomTotem(DamageSource source, CallbackInfoReturnable<Boolean> callback) {
         //initializes PlayerEntity entity, which is a copy of this cast to Living Entity and then PlayerEntity
         if (source.isOutOfWorld()) {
-            callback.cancel();
+            callback.setReturnValue(false);
+            return;
         }
         //noinspection ConstantValue
         if (((Entity)this) instanceof ServerPlayerEntity player) {

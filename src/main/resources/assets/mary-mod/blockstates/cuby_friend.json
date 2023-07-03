@@ -1,0 +1,79 @@
+{
+  "variants": {
+    "facing=north,cuby_skin=ansi": {
+      "model": "mary-mod:block/cubys/ansi"
+    },
+    "facing=east,cuby_skin=ansi": {
+      "model": "mary-mod:block/cubys/ansi",
+      "y": 90
+    },
+    "facing=south,cuby_skin=ansi": {
+      "model": "mary-mod:block/cubys/ansi",
+      "y": 180
+    },
+    "facing=west,cuby_skin=ansi": {
+      "model": "mary-mod:block/cubys/ansi",
+      "y": 270
+    },
+    "facing=north,cuby_skin=amilcar": {
+      "model": "mary-mod:block/cubys/amilcar"
+    },
+    "facing=east,cuby_skin=amilcar": {
+      "model": "mary-mod:block/cubys/amilcar",
+      "y": 90
+    },
+    "facing=south,cuby_skin=amilcar": {
+      "model": "mary-mod:block/cubys/amilcar",
+      "y": 180
+    },
+    "facing=west,cuby_skin=amilcar": {
+      "model": "mary-mod:block/cubys/amilcar",
+      "y": 270
+    },
+    "facing=north,cuby_skin=craft": {
+      "model": "mary-mod:block/cubys/craft"
+    },
+    "facing=east,cuby_skin=craft": {
+      "model": "mary-mod:block/cubys/craft",
+      "y": 90
+    },
+    "facing=south,cuby_skin=craft": {
+      "model": "mary-mod:block/cubys/craft",
+      "y": 180
+    },
+    "facing=west,cuby_skin=craft": {
+      "model": "mary-mod:block/cubys/craft",
+      "y": 270
+    },
+    "facing=north,cuby_skin=daarick": {
+      "model": "mary-mod:block/cubys/daarick"
+    },
+    "facing=east,cuby_skin=daarick": {
+      "model": "mary-mod:block/cubys/daarick",
+      "y": 90
+    },
+    "facing=south,cuby_skin=daarick": {
+      "model": "mary-mod:block/cubys/daarick",
+      "y": 180
+    },
+    "facing=west,cuby_skin=daarick": {
+      "model": "mary-mod:block/cubys/daarick",
+      "y": 270
+    },
+    "facing=north,cuby_skin=emet": {
+      "model": "mary-mod:block/cubys/emet"
+    },
+    "facing=east,cuby_skin=emet": {
+      "model": "mary-mod:block/cubys/emet",
+      "y": 90
+    },
+    "facing=south,cuby_skin=emet": {
+      "model": "mary-mod:block/cubys/emet",
+      "y": 180
+    },
+    "facing=west,cuby_skin=emet": {
+      "model": "mary-mod:block/cubys/emet",
+      "y": 270
+    }
+  }
+}

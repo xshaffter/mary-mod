@@ -20,6 +20,10 @@ import java.nio.file.Path;
 
 @Environment(EnvType.CLIENT)
 public class MaryModClient implements ClientModInitializer {
+    public static final String ADMINISTRATOR_TEAM = "administrator";
+    public static final String PLAYER_TEAM = "people";
+    public static final String SUPPORT_TEAM = "support";
+
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockManager.COMPUTER, RenderLayer.getCutout());
@@ -38,6 +42,6 @@ public class MaryModClient implements ClientModInitializer {
     }
 
     public static String getModVersion() {
-        return "1.3.1";
+        return "1.5";
     }
 }

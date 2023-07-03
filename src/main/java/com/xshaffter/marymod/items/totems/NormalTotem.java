@@ -22,7 +22,7 @@ public class NormalTotem {
         if (entity instanceof LivingEntity living) {
             living.setHealth(1.0f);
             living.clearStatusEffects();
-            living.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 40, 0));
+            living.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 40, 9));
         }
     }
 }

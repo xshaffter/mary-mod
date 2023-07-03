@@ -96,6 +96,17 @@ public class BlockManager {
                     .hardness(1f)
     );
 
+    public static final Block CUBY_FRIEND = new CubyFriend();
+
+//    public static final Block ICE_CREAM = new UsableTextBlock(
+//            Text.literal("Crazy supra!!"),
+//            FabricBlockSettings.of(Material.CAKE)
+//                    .nonOpaque()
+//                    .sounds(BlockSoundGroup.WOOL)
+//                    .strength(4f)
+//                    .hardness(1f)
+//    );
+
     public static final Block CABIN = new PoliceCabin();
 
     public static final Block ALARM = new OnActionBlock(
@@ -144,5 +155,7 @@ public class BlockManager {
         registerBlockAuto("alarm", ALARM);
         registerBlockAuto("cake", CAKE);
         registerBlockAuto("cabin", CABIN);
+        registerBlockAuto("cuby_friend", CUBY_FRIEND);
+        //registerBlockAuto("cabin", ICE_CREAM);
     }
 }

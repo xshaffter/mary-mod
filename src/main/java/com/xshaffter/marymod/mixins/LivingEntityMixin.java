@@ -14,6 +14,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -49,6 +50,7 @@ public abstract class LivingEntityMixin extends Entity implements IEntityDataSav
         if (((Entity)this) instanceof ServerPlayerEntity player) {
             var totem_item = new NormalTotem();
             totem_item.performResurrection(this);
+            player.increaseStat(Stats.DEATHS,1);
             totem_item.postRevive(this);
             callback.setReturnValue(true);
             if (isFirstDead()) {

@@ -15,7 +15,6 @@
   "block.mary-mod.alarm": "Alarma",
   "block.mary-mod.cabin": "Cabina",
   "item.mary-mod.mary_coin_item": "Mary Coin",
-  "item.mary-mod.ciggar": "Cigarro",
   "item.mary-mod.hammer": "Martillo del ban",
   "item.mary-mod.sword": "Espada de Mary",
   "item.mary-mod.chocoramo": "Chocoramo",
@@ -23,8 +22,22 @@
   "tooltip.mary-mod.mary_coin": "Una moneda que",
   "tooltip.mary-mod.mary_coin.2": "dictamina el destino",
   "itemGroup.mary-mod.mary_mod": "Mary Mod",
+  "itemGroup.mary-mod.mary_mod_advancements": "Mary Mod Logros",
   "menu.mary-mod.play": "Jugar",
   "key.category.mary-mod": "Mary Mod",
   "key.mary-mod.bark": "Ladrar",
-  "key.mary-mod.actions": "Acciones"
-}
+  "key.mary-mod.actions": "Acciones",
+
+  "item.mary-mod.broken_boat": "Bote roto",
+  "item.mary-mod.ciggar": "Cigarro",
+  "item.mary-mod.confetti": "Confeti",
+  "item.mary-mod.danger": "Danger",
+  "item.mary-mod.disk_ball": "Bola disco",
+  "item.mary-mod.inner_peace": "Paz mental",
+  "item.mary-mod.loading_bar": "Barra de carga",
+  "item.mary-mod.maryland": "MaryLand",
+  "item.mary-mod.paint": "Ajololisa",
+  "item.mary-mod.phd": "Doctorado",
+  "item.mary-mod.polaroid": "Polaroid",
+  "item.mary-mod.poro_galleta_advance": "Poro galleta"
+  }

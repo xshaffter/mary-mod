@@ -1,16 +1,16 @@
 {
   "display": {
     "icon": {
-      "item": "mary-mod:ciggar"
+      "item": "mary-mod:polaroid"
     },
-    "title": "Gastronomia",
-    "description": "Has terminado los juicios de desbaneo!",
+    "title": "A 100 la foto!",
+    "description": "Conociste a muchos amigos!",
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "mary-mod:mary_corazon",
+  "parent": "mary-mod:big_party",
   "criteria": {
     "requirement": {
       "trigger": "mary-mod:dummy"

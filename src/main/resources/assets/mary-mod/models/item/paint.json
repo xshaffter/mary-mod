@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mary-mod:item/advancement/ciggar"
+    "layer0": "mary-mod:item/advancement/pintura"
   }
 }

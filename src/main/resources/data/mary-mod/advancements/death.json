@@ -1,16 +1,16 @@
 {
   "display": {
     "icon": {
-      "item": "mary-mod:ciggar"
+      "item": "mary-mod:broken_boat"
     },
-    "title": "Gastronomia",
-    "description": "Has terminado los juicios de desbaneo!",
+    "title": "He muerto?",
+    "description": "Sera que moriste?",
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "mary-mod:mary_corazon",
+  "parent": "mary-mod:home",
   "criteria": {
     "requirement": {
       "trigger": "mary-mod:dummy"

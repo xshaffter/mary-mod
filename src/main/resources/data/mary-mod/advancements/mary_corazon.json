@@ -1,16 +1,16 @@
 {
   "display": {
     "icon": {
-      "item": "mary-mod:ciggar"
+      "item": "mary-mod:phd"
     },
-    "title": "Gastronomia",
-    "description": "Has terminado los juicios de desbaneo!",
+    "title": "Doctorado",
+    "description": "Doctrado en corazones!",
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "mary-mod:mary_corazon",
+  "parent": "mary-mod:cook",
   "criteria": {
     "requirement": {
       "trigger": "mary-mod:dummy"

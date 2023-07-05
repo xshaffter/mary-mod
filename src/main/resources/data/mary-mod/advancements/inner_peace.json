@@ -1,16 +1,16 @@
 {
   "display": {
     "icon": {
-      "item": "mary-mod:ciggar"
+      "item": "mary-mod:inner_peace"
     },
-    "title": "Gastronomia",
-    "description": "Has terminado los juicios de desbaneo!",
+    "title": "Paz mental",
+    "description": "Un pooco de tranquilidad",
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "mary-mod:mary_corazon",
+  "parent": "mary-mod:piece_of_way",
   "criteria": {
     "requirement": {
       "trigger": "mary-mod:dummy"

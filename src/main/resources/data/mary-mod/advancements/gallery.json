@@ -1,16 +1,16 @@
 {
   "display": {
     "icon": {
-      "item": "mary-mod:ciggar"
+      "item": "mary-mod:paint"
     },
-    "title": "Gastronomia",
-    "description": "Has terminado los juicios de desbaneo!",
+    "title": "Galeria",
+    "description": "Un sitio lleno de recuerdos!",
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "mary-mod:mary_corazon",
+  "parent": "mary-mod:danger",
   "criteria": {
     "requirement": {
       "trigger": "mary-mod:dummy"

@@ -27,12 +27,18 @@ public class ItemManager {
                             .saturationModifier(11)
                             .build())
     );
-    public static final Item CIGGAR = new MaryItem(
-            new FabricItemSettings()
-                    .rarity(Rarity.COMMON)
-                    .maxCount(16)
-                    .fireproof()
-    );
+    public static final Item BROKEN_BOAT = new AdvancementItem();
+    public static final Item CIGGAR = new AdvancementItem();
+    public static final Item CONFETTI = new AdvancementItem();
+    public static final Item DANGER = new AdvancementItem();
+    public static final Item DISK_BALL = new AdvancementItem();
+    public static final Item INNER_PEACE = new AdvancementItem();
+    public static final Item LOADING_BAR = new AdvancementItem();
+    public static final Item MARYLAND = new AdvancementItem();
+    public static final Item PAINT = new AdvancementItem();
+    public static final Item PHD = new AdvancementItem();
+    public static final Item POLAROID = new AdvancementItem();
+    public static final Item PORO_GALLETA_ADVANCE = new AdvancementItem();
 
     public static final Item CROWN = new Crown();
 
@@ -42,11 +48,23 @@ public class ItemManager {
     }
 
     public static void registerModItems() {
-        registerItem("ciggar", CIGGAR);
         registerItem("mary_coin_item", MARY_COIN_ITEM);
         registerItem("sword", SWORD);
         registerItem("hammer", HAMMER);
         registerItem("chocoramo", CHOCORAMO);
         registerItem("crown", CROWN);
+
+        registerItem("broken_boat", BROKEN_BOAT);
+        registerItem("ciggar", CIGGAR);
+        registerItem("confetti", CONFETTI);
+        registerItem("danger", DANGER);
+        registerItem("disk_ball", DISK_BALL);
+        registerItem("inner_peace", INNER_PEACE);
+        registerItem("loading_bar", LOADING_BAR);
+        registerItem("maryland", MARYLAND);
+        registerItem("paint", PAINT);
+        registerItem("phd", PHD);
+        registerItem("polaroid", POLAROID);
+        registerItem("poro_galleta_advance", PORO_GALLETA_ADVANCE);
     }
 }

@@ -1,16 +1,15 @@
 {
   "display": {
     "icon": {
-      "item": "mary-mod:ciggar"
+      "item": "mary-mod:maryland"
     },
-    "title": "Gastronomia",
-    "description": "Has terminado los juicios de desbaneo!",
+    "title": "En casa",
+    "description": "Bienvenida a Mary Land!! la aventura comienza",
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "mary-mod:mary_corazon",
   "criteria": {
     "requirement": {
       "trigger": "mary-mod:dummy"

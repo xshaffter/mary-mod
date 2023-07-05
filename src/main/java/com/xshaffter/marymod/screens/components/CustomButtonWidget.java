@@ -34,5 +34,8 @@ public class CustomButtonWidget extends ButtonWidget {
 
         drawTexture(matrices, this.x, this.y, this.width, this.height, 0, i * 18, 18, 18, 18, 54);
         this.renderBackground(matrices, minecraftClient, mouseX, mouseY);
+        if (this.isHovered()) {
+            this.renderTooltip(matrices, mouseX, mouseY);
+        }
     }
 }

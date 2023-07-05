@@ -5,6 +5,7 @@ import com.xshaffter.marymod.MaryMod;
 import com.xshaffter.marymod.mixins.ScreenMixin;
 import com.xshaffter.marymod.networking.NetworkManager;
 import com.xshaffter.marymod.networking.packets.ActionCommand;
+import com.xshaffter.marymod.screens.components.AdvancementButton;
 import com.xshaffter.marymod.screens.components.CustomButtonWidget;
 import com.xshaffter.marymod.screens.handlers.ActionsScreenHandler;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -81,12 +82,22 @@ public class ActionsScreen extends HandledScreen<ActionsScreenHandler> {
                     consumer.accept(element.tooltip);
                 }
             };
-            var button = new CustomButtonWidget(x + startX + (buttonSize + buttonGap) * currentColumn, y + startY + (buttonSize + buttonGap) * currentRow, buttonSize, buttonSize, ACTION_BUTTON_TEXTURE, (unused) -> {
-                var buffer = PacketByteBufs.create();
-                var actionInt = finalCurrentColumn + (finalCurrentRow * maxColumnsPerRow);
-                buffer.writeByte(actionInt);
-                ClientPlayNetworking.send(NetworkManager.COMMAND_ACTION_ID, buffer);
-            }, tooltipSupplier);
+            ButtonWidget button;
+            if (element.isAdvancement()) {
+                button = new AdvancementButton(x + startX + (buttonSize + buttonGap) * currentColumn, y + startY + (buttonSize + buttonGap) * currentRow, buttonSize, buttonSize, (unused) -> {
+                    var buffer = PacketByteBufs.create();
+                    var actionInt = finalCurrentColumn + (finalCurrentRow * maxColumnsPerRow);
+                    buffer.writeByte(actionInt);
+                    ClientPlayNetworking.send(NetworkManager.COMMAND_ACTION_ID, buffer);
+                }, tooltipSupplier);
+            } else {
+                button = new CustomButtonWidget(x + startX + (buttonSize + buttonGap) * currentColumn, y + startY + (buttonSize + buttonGap) * currentRow, buttonSize, buttonSize, ACTION_BUTTON_TEXTURE, (unused) -> {
+                    var buffer = PacketByteBufs.create();
+                    var actionInt = finalCurrentColumn + (finalCurrentRow * maxColumnsPerRow);
+                    buffer.writeByte(actionInt);
+                    ClientPlayNetworking.send(NetworkManager.COMMAND_ACTION_ID, buffer);
+                }, tooltipSupplier);
+            }
 
             this.addDrawableChild(button);
 
@@ -108,11 +119,6 @@ public class ActionsScreen extends HandledScreen<ActionsScreenHandler> {
     private void drawButtons(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         for (Drawable widget : ((ScreenMixin) this).getDrawables()) {
             widget.render(matrixStack, mouseX, mouseY, partialTicks);
-            if (widget instanceof ButtonWidget btn) {
-                if (btn.isHovered()) {
-                    btn.renderTooltip(matrixStack, mouseX, mouseY);
-                }
-            }
         }
     }
 }

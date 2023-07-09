@@ -1,5 +1,6 @@
 package com.xshaffter.marymod.networking.packets;
 
+import com.xshaffter.marymod.MaryModClient;
 import com.xshaffter.marymod.events.SoundManager;
 import com.xshaffter.marymod.util.PlayerEntityBridge;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -15,7 +16,7 @@ public class BarkC2SPacket {
                                PacketByteBuf buf, PacketSender responseSender) {
         // Everything here happens ONLY on the Server!
         ServerWorld world = player.getWorld();
-        if (PlayerEntityBridge.getTeam(player).equalsIgnoreCase("administrator")) {
+        if (PlayerEntityBridge.getTeam(player).equalsIgnoreCase(MaryModClient.DANGER_TEAM)) {
             world.playSound(null, player.getBlockPos(), SoundManager.BEAGLE_BARK, SoundCategory.PLAYERS, 1f, 1f);
         }
     }

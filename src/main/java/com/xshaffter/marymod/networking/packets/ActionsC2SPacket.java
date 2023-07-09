@@ -17,8 +17,9 @@ import net.minecraft.text.Text;
 public class ActionsC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
-        // Everything here happens ONLY on the Server!
-        if (PlayerEntityBridge.getTeam(player).equalsIgnoreCase(MaryModClient.ADMINISTRATOR_TEAM)) {
+        if (PlayerEntityBridge.getTeam(player).equalsIgnoreCase(MaryModClient.ADMINISTRATOR_TEAM) ||
+                PlayerEntityBridge.getTeam(player).equalsIgnoreCase(MaryModClient.DANGER_TEAM))
+        {
             NamedScreenHandlerFactory screenHandlerFactory = new NamedScreenHandlerFactory() {
                 @Override
                 public Text getDisplayName() {

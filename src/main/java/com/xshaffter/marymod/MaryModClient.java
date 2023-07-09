@@ -22,7 +22,7 @@ import java.nio.file.Path;
 public class MaryModClient implements ClientModInitializer {
     public static final String ADMINISTRATOR_TEAM = "administrator";
     public static final String PLAYER_TEAM = "people";
-    public static final String SUPPORT_TEAM = "support";
+    public static final String DANGER_TEAM = "support";
 
     @Override
     public void onInitializeClient() {
@@ -42,6 +42,6 @@ public class MaryModClient implements ClientModInitializer {
     }
 
     public static String getModVersion() {
-        return "1.5";
+        return "1.6";
     }
 }

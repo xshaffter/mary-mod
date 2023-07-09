@@ -26,7 +26,6 @@ public class MaryMod implements ModInitializer {
         BlockManager.registerModBlocks();
         ModScreenHandlers.registerScreenHandlersForServer();
         AdvancementManager.registerCriterions();
-        SoundManager.registerSounds();
         NetworkManager.registerC2SPackets();
     }
 }

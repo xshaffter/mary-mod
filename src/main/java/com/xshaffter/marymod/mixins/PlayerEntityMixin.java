@@ -4,7 +4,9 @@ import com.xshaffter.marymod.MaryMod;
 import com.xshaffter.marymod.MaryModClient;
 import com.xshaffter.marymod.items.totems.NormalTotem;
 import com.xshaffter.marymod.util.IPlayerFunctions;
+import com.xshaffter.marymod.util.PlayerEntityBridge;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -31,8 +33,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerF
     @Shadow
     public abstract Text getDisplayName();
 
-    @Shadow public abstract boolean canHarvest(BlockState state);
-
     private MutableText getNameAsMutable() {
         return (MutableText) this.getName();
     }
@@ -58,16 +58,24 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IPlayerF
         super(entityType, world);
     }
 
-    @Inject(at = @At("HEAD"), method = "isBlockBreakingRestricted", cancellable = true)
-    public void isBlockBreakingRestrictedForMary(World world, BlockPos pos, GameMode gameMode, CallbackInfoReturnable<Boolean> cir) {
-        if (this.canHarvest(world.getBlockState(pos))) {
+    @Inject(at = @At("HEAD"), method = "damage", cancellable = true)
+    public void canDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if (PlayerEntityBridge.getTeam(this).equalsIgnoreCase(MaryModClient.DANGER_TEAM)) {
+            cir.setReturnValue(false);
             cir.cancel();
         }
+    }
 
-        if (getNameString().equalsIgnoreCase("maryblog") || this.getTeamName().equalsIgnoreCase("people")) {
-            cir.setReturnValue(true);
+    @Inject(at = @At("HEAD"), method = "isBlockBreakingRestricted", cancellable = true)
+    public void isBlockBreakingRestrictedForMary(World world, BlockPos pos, GameMode gameMode, CallbackInfoReturnable<Boolean> cir) {
+        if (world.getBlockState(pos).isOf(Blocks.COARSE_DIRT)) {
+            cir.setReturnValue(false);
         } else {
-            cir.cancel();
+            if (getNameString().equalsIgnoreCase("maryblog") || this.getTeamName().equalsIgnoreCase(MaryModClient.PLAYER_TEAM)) {
+                cir.setReturnValue(true);
+            } else {
+                cir.cancel();
+            }
         }
     }
 }

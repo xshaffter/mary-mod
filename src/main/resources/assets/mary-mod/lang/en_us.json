@@ -14,6 +14,7 @@
   "block.mary-mod.cake": "Pastel",
   "block.mary-mod.alarm": "Alarma",
   "block.mary-mod.cabin": "Cabina",
+  "block.mary-mod.cuby_friend": "Amigo cubito",
   "item.mary-mod.mary_coin_item": "Mary Coin",
   "item.mary-mod.hammer": "Martillo del ban",
   "item.mary-mod.sword": "Espada de Mary",
@@ -25,8 +26,17 @@
   "itemGroup.mary-mod.mary_mod_advancements": "Mary Mod Logros",
   "menu.mary-mod.play": "Jugar",
   "key.category.mary-mod": "Mary Mod",
-  "key.mary-mod.bark": "Ladrar",
+  "key.mary-mod.bark": "Control 1",
   "key.mary-mod.actions": "Acciones",
+  "block.mary-mod.cuby_friend_ansi": "Ansi cubito",
+  "block.mary-mod.cuby_friend_amilcar": "Amilcar cubito",
+  "block.mary-mod.cuby_friend_28": "Daarick cubito",
+  "block.mary-mod.cuby_friend_antoni": "Craft cubito",
+  "block.mary-mod.cuby_friend_emet": "Emet",
+  "block.mary-mod.ceil_floor": "Techopiso",
+  "block.mary-mod.dark_pancito": "Pancito oscuro",
+  "block.mary-mod.miss_pancito": "señora pancito",
+  "block.mary-mod.sir_pancito": "señor pancito",
 
   "item.mary-mod.broken_boat": "Bote roto",
   "item.mary-mod.ciggar": "Cigarro",
@@ -39,5 +49,12 @@
   "item.mary-mod.paint": "Ajololisa",
   "item.mary-mod.phd": "Doctorado",
   "item.mary-mod.polaroid": "Polaroid",
-  "item.mary-mod.poro_galleta_advance": "Poro galleta"
+  "item.mary-mod.poro_galleta_advance": "Poro galleta",
+  "item.mary-mod.fansa_music_disc": "Fansa",
+  "item.mary-mod.rasputin_disc": "ra ra rasputin",
+  "item.mary-mod.dark_cave_disc": "Dark cave",
+  "item.mary-mod.fansa_music_disc.desc": "Fansa",
+  "item.mary-mod.rasputin_disc.desc": "ra ra rasputin",
+  "item.mary-mod.dark_cave_disc.desc": "Dark cave"
+
   }

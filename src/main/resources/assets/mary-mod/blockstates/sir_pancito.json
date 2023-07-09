@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mary-mod:block/sir_pancito"
+    },
+    "facing=east": {
+      "model": "mary-mod:block/sir_pancito",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mary-mod:block/sir_pancito",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mary-mod:block/sir_pancito",
+      "y": 270
+    }
+  }
+}

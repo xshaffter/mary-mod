@@ -8,10 +8,13 @@ import net.minecraft.util.registry.Registry;
 
 
 public class SoundManager {
-    private static final Identifier BEAGLE_BARK_ID = new Identifier(MaryMod.MOD_ID, "beagle_bark");
-    public static final SoundEvent BEAGLE_BARK = new SoundEvent(BEAGLE_BARK_ID);
+    public static final SoundEvent BEAGLE_BARK = registerSound("beagle_bark");
+    public static final SoundEvent FANSA_MUSIC = registerSound("fansa_music");
+    public static final SoundEvent RASPUTIN = registerSound("rasputin");
+    public static final SoundEvent DARK_CAVE = registerSound("dark_cave");
 
-    public static void registerSounds() {
-        Registry.register(Registry.SOUND_EVENT, BEAGLE_BARK_ID, BEAGLE_BARK);
+    private static SoundEvent registerSound(final String name) {
+        Identifier id = new Identifier(MaryMod.MOD_ID, name);
+        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id));
     }
 }

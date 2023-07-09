@@ -25,6 +25,13 @@ public class BlockManager {
     public static final Block PORO_GALLETA = new PoroGalleta();
     public static final Block CANDY_MACHINE = new CandyMachine();
 
+    public static final Block CEIL_FLOOR_BLOCK = new Block(
+            FabricBlockSettings.of(Material.STONE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.STONE)
+                    .strength(4f)
+                    .hardness(1f)
+    );
     public static final Block AMAZON_BOX = new UsableTextBlock(
             Material.WOOD,
             BlockSoundGroup.WOOL,
@@ -95,17 +102,36 @@ public class BlockManager {
                     .strength(4f)
                     .hardness(1f)
     );
+    public static final Block DARK_PANCITO = new UsableTextBlock(
+            Text.literal("Pancito oscuro"),
+            FabricBlockSettings.of(Material.CAKE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.WOOL)
+                    .strength(4f)
+                    .hardness(1f)
+    );
+    public static final Block MISS_PANCITO = new UsableTextBlock(
+            Text.literal("La señora pancito"),
+            FabricBlockSettings.of(Material.CAKE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.WOOL)
+                    .strength(4f)
+                    .hardness(1f)
+    );
+    public static final Block SIR_PANCITO = new UsableTextBlock(
+            Text.literal("El señor pancito"),
+            FabricBlockSettings.of(Material.CAKE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.WOOL)
+                    .strength(4f)
+                    .hardness(1f)
+    );
 
-    public static final Block CUBY_FRIEND = new CubyFriend();
-
-//    public static final Block ICE_CREAM = new UsableTextBlock(
-//            Text.literal("Crazy supra!!"),
-//            FabricBlockSettings.of(Material.CAKE)
-//                    .nonOpaque()
-//                    .sounds(BlockSoundGroup.WOOL)
-//                    .strength(4f)
-//                    .hardness(1f)
-//    );
+    public static final Block CUBY_FRIEND_ANSI = new CubyFriend();
+    public static final Block CUBY_FRIEND_AMILCAR = new CubyFriend();
+    public static final Block CUBY_FRIEND_28 = new CubyFriend();
+    public static final Block CUBY_FRIEND_ANTONI = new CubyFriend();
+    public static final Block CUBY_FRIEND_EMET = new CubyFriend();
 
     public static final Block CABIN = new PoliceCabin();
 
@@ -139,7 +165,6 @@ public class BlockManager {
 
     public static void registerModBlocks() {
 
-        //TODO: cabina, maquina dulces, escritorio, monitores, pastel
         registerBlockAuto("mary_blue", MARY_BLUE);
         registerBlockAuto("mary_coin", MARY_COIN);
         registerBlockAuto("poro_galletas", PORO_GALLETA);
@@ -155,7 +180,14 @@ public class BlockManager {
         registerBlockAuto("alarm", ALARM);
         registerBlockAuto("cake", CAKE);
         registerBlockAuto("cabin", CABIN);
-        registerBlockAuto("cuby_friend", CUBY_FRIEND);
-        //registerBlockAuto("cabin", ICE_CREAM);
+        registerBlockAuto("cuby_friend_ansi", CUBY_FRIEND_ANSI);
+        registerBlockAuto("cuby_friend_amilcar", CUBY_FRIEND_AMILCAR);
+        registerBlockAuto("cuby_friend_28", CUBY_FRIEND_28);
+        registerBlockAuto("cuby_friend_antoni", CUBY_FRIEND_ANTONI);
+        registerBlockAuto("cuby_friend_emet", CUBY_FRIEND_EMET);
+        registerBlockAuto("ceil_floor", CEIL_FLOOR_BLOCK);
+        registerBlockAuto("dark_pancito", DARK_PANCITO);
+        registerBlockAuto("miss_pancito", MISS_PANCITO);
+        registerBlockAuto("sir_pancito", SIR_PANCITO);
     }
 }

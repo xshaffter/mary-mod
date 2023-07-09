@@ -1,6 +1,7 @@
 package com.xshaffter.marymod.blocks.custom;
 
 import com.xshaffter.marymod.blocks.bases.UsableTextBlock;
+import com.xshaffter.marymod.blocks.bases.UseBreakBlock;
 import com.xshaffter.marymod.blocks.blockstates.CubySkin;
 import com.xshaffter.marymod.blocks.blockstates.KingCape;
 import com.xshaffter.marymod.blocks.blockstates.PropertyManager;
@@ -13,20 +14,14 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.text.Text;
 
-public class CubyFriend extends UsableTextBlock {
-    public static final EnumProperty<CubySkin> SKIN = PropertyManager.CUBY_SKIN;
+public class CubyFriend extends UseBreakBlock {
     public CubyFriend() {
         super(
                 FabricBlockSettings.of(Material.CAKE)
                         .nonOpaque()
                         .sounds(BlockSoundGroup.WOOL)
                         .strength(4f)
-                        .hardness(1f),
-                Text.literal("Uno de mis amigos pero... chikito ")
+                        .hardness(1f)
         );
-    }
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(SKIN));
     }
 }

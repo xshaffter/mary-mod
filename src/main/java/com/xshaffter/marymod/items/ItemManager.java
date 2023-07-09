@@ -1,6 +1,7 @@
 package com.xshaffter.marymod.items;
 
 import com.xshaffter.marymod.MaryMod;
+import com.xshaffter.marymod.events.SoundManager;
 import com.xshaffter.marymod.items.custom.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
@@ -42,6 +43,10 @@ public class ItemManager {
 
     public static final Item CROWN = new Crown();
 
+    public static final Item FANSA_MUSIC_DISC = new ModMusicDiscItem(9, SoundManager.FANSA_MUSIC, 247);
+    public static final Item RASPUTIN_DISC = new ModMusicDiscItem(9, SoundManager.RASPUTIN, 269);
+    public static final Item DARK_CAVE_DISC = new ModMusicDiscItem(9, SoundManager.DARK_CAVE, 144);
+
 
     private static void registerItem(String name, Item item) {
         Registry.register(Registry.ITEM, new Identifier(MaryMod.MOD_ID, name), item);
@@ -66,5 +71,9 @@ public class ItemManager {
         registerItem("phd", PHD);
         registerItem("polaroid", POLAROID);
         registerItem("poro_galleta_advance", PORO_GALLETA_ADVANCE);
+
+        registerItem("fansa_music_disc", FANSA_MUSIC_DISC);
+        registerItem("rasputin_disc", RASPUTIN_DISC);
+        registerItem("dark_cave_disc", DARK_CAVE_DISC);
     }
 }

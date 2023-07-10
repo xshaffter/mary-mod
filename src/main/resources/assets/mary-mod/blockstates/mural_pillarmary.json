@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "mary-mod:block/mural/pillarmary"
+        },
+        "facing=east": {
+            "model": "mary-mod:block/mural/pillarmary",
+            "y": 90
+        },
+        "facing=south": {
+            "model": "mary-mod:block/mural/pillarmary",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "mary-mod:block/mural/pillarmary",
+            "y": 270
+        }
+    }
+}

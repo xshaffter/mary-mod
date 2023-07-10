@@ -27,7 +27,6 @@ public class BlockManager {
 
     public static final Block CEIL_FLOOR_BLOCK = new Block(
             FabricBlockSettings.of(Material.STONE)
-                    .nonOpaque()
                     .sounds(BlockSoundGroup.STONE)
                     .strength(4f)
                     .hardness(1f)
@@ -76,14 +75,7 @@ public class BlockManager {
                     .hardness(1f)
     );
 
-    public static final Block TOMB = new UsableTextBlock(
-            Text.literal("una tumba..."),
-            FabricBlockSettings.of(Material.STONE)
-                    .nonOpaque()
-                    .sounds(BlockSoundGroup.STONE)
-                    .strength(4f)
-                    .hardness(1f)
-    );
+    public static final Block TOMB = new TombBlock();
 
     public static final Block EASEL = new UsableTextBlock(
             Text.literal("Aqui deberian estar mis pinturas... donde estaran?"),
@@ -132,7 +124,36 @@ public class BlockManager {
     public static final Block CUBY_FRIEND_28 = new CubyFriend();
     public static final Block CUBY_FRIEND_ANTONI = new CubyFriend();
     public static final Block CUBY_FRIEND_EMET = new CubyFriend();
-
+    public static final Block CUBY_FRIEND_CRISGREEN = new CubyFriend();
+    public static final Block CUBY_FRIEND_EMIKUKIS = new CubyFriend();
+    public static final Block CUBY_FRIEND_JULI = new CubyFriend();
+    public static final Block CUBY_FRIEND_SHADOUNE = new CubyFriend();
+    public static final Block MURAL_AJOLOTE = new MuralBlock();
+    public static final Block MURAL_AVION = new MuralBlock();
+    public static final Block MURAL_BATA = new MuralBlock();
+    public static final Block MURAL_CORAZON = new MuralBlock();
+    public static final Block MURAL_CUEVA = new MuralBlock();
+    public static final Block MURAL_ESPADA = new MuralBlock();
+    public static final Block MURAL_HORNO = new MuralBlock();
+    public static final Block MURAL_INFERIOR_DERECHA = new MuralBlock();
+    public static final Block MURAL_INFERIOR_IZQUIERDA = new MuralBlock();
+    public static final Block MURAL_MAZO = new MuralBlock();
+    public static final Block MURAL_MICROFONO = new MuralBlock();
+    public static final Block MURAL_PASTEL = new MuralBlock();
+    public static final Block MURAL_PILLARMARY = new MuralBlock();
+    public static final Block MURAL_RELLENO1 = new MuralBlock();
+    public static final Block MURAL_RELLENO2 = new MuralBlock();
+    public static final Block MURAL_RELLENO3 = new MuralBlock();
+    public static final Block MURAL_RELLENO4 = new MuralBlock();
+    public static final Block MURAL_RELLENO5 = new MuralBlock();
+    public static final Block MURAL_RELLENO6 = new MuralBlock();
+    public static final Block MURAL_RELLENO7 = new MuralBlock();
+    public static final Block MURAL_RELLENO8 = new MuralBlock();
+    public static final Block MURAL_RELLENO9 = new MuralBlock();
+    public static final Block MURAL_SUPERIOR_DERECHA = new MuralBlock();
+    public static final Block MURAL_SUPERIOR_IZQUIERDA = new MuralBlock();
+    public static final Block MURAL_TEMPLO = new MuralBlock();
+    public static final Block MURAL_TUMBA = new MuralBlock();
     public static final Block CABIN = new PoliceCabin();
 
     public static final Block ALARM = new OnActionBlock(
@@ -185,9 +206,41 @@ public class BlockManager {
         registerBlockAuto("cuby_friend_28", CUBY_FRIEND_28);
         registerBlockAuto("cuby_friend_antoni", CUBY_FRIEND_ANTONI);
         registerBlockAuto("cuby_friend_emet", CUBY_FRIEND_EMET);
+
+        registerBlockAuto("cuby_friend_crisgreen", CUBY_FRIEND_CRISGREEN);
+        registerBlockAuto("cuby_friend_emikukis", CUBY_FRIEND_EMIKUKIS);
+        registerBlockAuto("cuby_friend_juli", CUBY_FRIEND_JULI);
+        registerBlockAuto("cuby_friend_shadoune", CUBY_FRIEND_SHADOUNE);
+
         registerBlockAuto("ceil_floor", CEIL_FLOOR_BLOCK);
         registerBlockAuto("dark_pancito", DARK_PANCITO);
         registerBlockAuto("miss_pancito", MISS_PANCITO);
         registerBlockAuto("sir_pancito", SIR_PANCITO);
+        registerBlockAuto("mural_ajolote", MURAL_AJOLOTE);
+        registerBlockAuto("mural_avion", MURAL_AVION);
+        registerBlockAuto("mural_bata", MURAL_BATA);
+        registerBlockAuto("mural_corazon", MURAL_CORAZON);
+        registerBlockAuto("mural_cueva", MURAL_CUEVA);
+        registerBlockAuto("mural_espada", MURAL_ESPADA);
+        registerBlockAuto("mural_horno", MURAL_HORNO);
+        registerBlockAuto("mural_inferior_derecha", MURAL_INFERIOR_DERECHA);
+        registerBlockAuto("mural_inferior_izquierda", MURAL_INFERIOR_IZQUIERDA);
+        registerBlockAuto("mural_mazo", MURAL_MAZO);
+        registerBlockAuto("mural_microfono", MURAL_MICROFONO);
+        registerBlockAuto("mural_pastel", MURAL_PASTEL);
+        registerBlockAuto("mural_pillarmary", MURAL_PILLARMARY);
+        registerBlockAuto("mural_relleno1", MURAL_RELLENO1);
+        registerBlockAuto("mural_relleno2", MURAL_RELLENO2);
+        registerBlockAuto("mural_relleno3", MURAL_RELLENO3);
+        registerBlockAuto("mural_relleno4", MURAL_RELLENO4);
+        registerBlockAuto("mural_relleno5", MURAL_RELLENO5);
+        registerBlockAuto("mural_relleno6", MURAL_RELLENO6);
+        registerBlockAuto("mural_relleno7", MURAL_RELLENO7);
+        registerBlockAuto("mural_relleno8", MURAL_RELLENO8);
+        registerBlockAuto("mural_relleno9", MURAL_RELLENO9);
+        registerBlockAuto("mural_superior_derecha", MURAL_SUPERIOR_DERECHA);
+        registerBlockAuto("mural_superior_izquierda", MURAL_SUPERIOR_IZQUIERDA);
+        registerBlockAuto("mural_templo", MURAL_TEMPLO);
+        registerBlockAuto("mural_tumba", MURAL_TUMBA);
     }
 }

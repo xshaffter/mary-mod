@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "mary-mod:block/mural/mazo"
+        },
+        "facing=east": {
+            "model": "mary-mod:block/mural/mazo",
+            "y": 90
+        },
+        "facing=south": {
+            "model": "mary-mod:block/mural/mazo",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "mary-mod:block/mural/mazo",
+            "y": 270
+        }
+    }
+}

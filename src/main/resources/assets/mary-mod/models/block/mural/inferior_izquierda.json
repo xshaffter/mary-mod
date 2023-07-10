@@ -1,0 +1,230 @@
+{
+    "credit": "Made with Blockbench",
+    "textures": {
+        "0": "mary-mod:block/mural/inferior_izquierda/base",
+        "1": "mary-mod:block/mural/inferior_izquierda/borde",
+        "particle": "mary-mod:block/mural/inferior_izquierda/base"
+    },
+    "elements": [
+        {
+            "from": [
+                0,
+                0,
+                7
+            ],
+            "to": [
+                16,
+                1,
+                8
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        0,
+                        0,
+                        14,
+                        1
+                    ],
+                    "texture": "#1"
+                },
+                "east": {
+                    "uv": [
+                        0,
+                        4,
+                        1,
+                        5
+                    ],
+                    "texture": "#1"
+                },
+                "south": {
+                    "uv": [
+                        0,
+                        1,
+                        14,
+                        2
+                    ],
+                    "texture": "#1"
+                },
+                "west": {
+                    "uv": [
+                        1,
+                        4,
+                        2,
+                        5
+                    ],
+                    "texture": "#1"
+                },
+                "up": {
+                    "uv": [
+                        14,
+                        3,
+                        0,
+                        2
+                    ],
+                    "texture": "#1"
+                },
+                "down": {
+                    "uv": [
+                        14,
+                        3,
+                        0,
+                        4
+                    ],
+                    "texture": "#1"
+                }
+            }
+        },
+        {
+            "from": [
+                15,
+                1,
+                7
+            ],
+            "to": [
+                16,
+                16.1,
+                8
+            ],
+            "rotation": {
+                "angle": 0,
+                "axis": "y",
+                "origin": [
+                    8,
+                    15.5,
+                    7.5
+                ]
+            },
+            "faces": {
+                "north": {
+                    "uv": [
+                        0,
+                        0,
+                        14,
+                        1
+                    ],
+                    "rotation": 90,
+                    "texture": "#1"
+                },
+                "east": {
+                    "uv": [
+                        14,
+                        3,
+                        0,
+                        4
+                    ],
+                    "rotation": 270,
+                    "texture": "#1"
+                },
+                "south": {
+                    "uv": [
+                        0,
+                        1,
+                        14,
+                        2
+                    ],
+                    "rotation": 270,
+                    "texture": "#1"
+                },
+                "west": {
+                    "uv": [
+                        14,
+                        3,
+                        0,
+                        2
+                    ],
+                    "rotation": 270,
+                    "texture": "#1"
+                },
+                "up": {
+                    "uv": [
+                        0,
+                        4,
+                        1,
+                        5
+                    ],
+                    "rotation": 270,
+                    "texture": "#1"
+                },
+                "down": {
+                    "uv": [
+                        1,
+                        4,
+                        2,
+                        5
+                    ],
+                    "rotation": 270,
+                    "texture": "#1"
+                }
+            }
+        },
+        {
+            "name": "tabla",
+            "from": [
+                0,
+                0,
+                8
+            ],
+            "to": [
+                16,
+                16,
+                9
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        0,
+                        0,
+                        4,
+                        4
+                    ],
+                    "texture": "#0"
+                },
+                "east": {
+                    "uv": [
+                        4,
+                        0,
+                        4.25,
+                        4
+                    ],
+                    "texture": "#0"
+                },
+                "south": {
+                    "uv": [
+                        0,
+                        4,
+                        4,
+                        8
+                    ],
+                    "texture": "#0"
+                },
+                "west": {
+                    "uv": [
+                        4,
+                        4,
+                        4.25,
+                        8
+                    ],
+                    "texture": "#0"
+                },
+                "up": {
+                    "uv": [
+                        8.25,
+                        0.25,
+                        4.25,
+                        0
+                    ],
+                    "texture": "#0"
+                },
+                "down": {
+                    "uv": [
+                        8.25,
+                        0.25,
+                        4.25,
+                        0.5
+                    ],
+                    "texture": "#0"
+                }
+            }
+        }
+    ]
+}

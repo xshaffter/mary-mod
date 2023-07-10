@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "mary-mod:block/mural/relleno6"
+        },
+        "facing=east": {
+            "model": "mary-mod:block/mural/relleno6",
+            "y": 90
+        },
+        "facing=south": {
+            "model": "mary-mod:block/mural/relleno6",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "mary-mod:block/mural/relleno6",
+            "y": 270
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mary-mod:block/cubys/juli"
+    },
+    "facing=east": {
+      "model": "mary-mod:block/cubys/juli",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mary-mod:block/cubys/juli",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mary-mod:block/cubys/juli",
+      "y": 270
+    }
+  }
+}

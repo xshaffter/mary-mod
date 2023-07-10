@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mary-mod:block/cubys/emikukis"
+    },
+    "facing=east": {
+      "model": "mary-mod:block/cubys/emikukis",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mary-mod:block/cubys/emikukis",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mary-mod:block/cubys/emikukis",
+      "y": 270
+    }
+  }
+}

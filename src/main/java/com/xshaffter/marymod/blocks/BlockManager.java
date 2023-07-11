@@ -156,6 +156,16 @@ public class BlockManager {
     public static final Block MURAL_TUMBA = new MuralBlock();
     public static final Block CABIN = new PoliceCabin();
 
+    public static final Block BANDERA = new UsableTextBlock(
+            FabricBlockSettings.of(Material.CAKE)
+                    .nonOpaque()
+                    .sounds(BlockSoundGroup.WOOL)
+                    .strength(4f)
+                    .hardness(1f),
+            Text.literal("Una bandera del reino"),
+            VoxelShapes.cuboid(0,0,0,1,2,1)
+    );
+
     public static final Block ALARM = new OnActionBlock(
             FabricBlockSettings.of(Material.METAL)
                     .nonOpaque()
@@ -241,6 +251,7 @@ public class BlockManager {
         registerBlockAuto("mural_superior_derecha", MURAL_SUPERIOR_DERECHA);
         registerBlockAuto("mural_superior_izquierda", MURAL_SUPERIOR_IZQUIERDA);
         registerBlockAuto("mural_templo", MURAL_TEMPLO);
-        registerBlockAuto("mural_tumba", MURAL_TUMBA);
+        registerBlockAuto("mural_tumba", MURAL_TUMBA);;
+        registerBlockAuto("bandera", BANDERA);
     }
 }

@@ -28,6 +28,10 @@
   "key.category.mary-mod": "Mary Mod",
   "key.mary-mod.bark": "Ladrar",
   "key.mary-mod.actions": "Acciones",
+  "block.mary-mod.cuby_friend_crisgreen":  "Crisgreen cubito",
+  "block.mary-mod.cuby_friend_emikukis": "Emikukis cubito",
+  "block.mary-mod.cuby_friend_juli":  "Juli cubito",
+  "block.mary-mod.cuby_friend_shadoune": "Shadoune cubito",
   "block.mary-mod.cuby_friend_ansi": "Ansi cubito",
   "block.mary-mod.cuby_friend_amilcar": "Amilcar cubito",
   "block.mary-mod.cuby_friend_28": "Daarick cubito",
@@ -39,6 +43,7 @@
   "block.mary-mod.sir_pancito": "señor pancito",
 
   "item.mary-mod.broken_boat": "Bote roto",
+  "item.mary-mod.smartphone": "Celular",
   "item.mary-mod.ciggar": "Cigarro",
   "item.mary-mod.confetti": "Confeti",
   "item.mary-mod.danger": "Danger",

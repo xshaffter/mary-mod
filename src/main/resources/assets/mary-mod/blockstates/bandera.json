@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mary-mod:block/bandera"
+    },
+    "facing=east": {
+      "model": "mary-mod:block/bandera",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mary-mod:block/bandera",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mary-mod:block/bandera",
+      "y": 270
+    }
+  }
+}

@@ -17,16 +17,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public enum ActionCommand {
-    CLEAR_PARK_BARRIER((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                        PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "fill -114 7 201 -117 9 201 air");
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                server.getCommandManager().executeWithPrefix(player.getCommandSource(), "fill -114 7 201 -117 9 201 barrier");
-            }
-        }, 5000);
-    }, Text.literal("remove park barrier")),
     TURN_DAY((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
               PacketByteBuf buf, PacketSender responseSender) -> {
         server.getCommandManager().executeWithPrefix(player.getCommandSource(), "time set day");
@@ -35,11 +25,6 @@ public enum ActionCommand {
                 PacketByteBuf buf, PacketSender responseSender) -> {
         server.getCommandManager().executeWithPrefix(player.getCommandSource(), "time set midnight");
     }, Text.literal("set night")),
-    TP_PARK((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-             PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "tp @p[gamemode=survival,team=%s] -62 4 191".formatted(MaryModClient.PLAYER_TEAM));
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:home".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("tp to park"), true),
     CLEAR_INVENTORY((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                      PacketByteBuf buf, PacketSender responseSender) -> {
         server.getPlayerManager().getPlayerList().forEach((p) -> {
@@ -69,7 +54,6 @@ public enum ActionCommand {
                          PacketByteBuf buf, PacketSender responseSender) -> {
         server.getCommandManager().executeWithPrefix(player.getCommandSource(), "fill -168 -50 294 -176 -50 302 air");
         server.getCommandManager().executeWithPrefix(player.getCommandSource(), "fill -168 -42 294 -176 -42 302 air");
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:gastronomia".formatted(MaryModClient.PLAYER_TEAM));
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -85,47 +69,7 @@ public enum ActionCommand {
     GIVE_DANGER_GLOW((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                       PacketByteBuf buf, PacketSender responseSender) -> {
         server.getCommandManager().executeWithPrefix(player.getCommandSource(), "effect give @p[gamemode=creative,team=%s] glowing 20".formatted(MaryModClient.DANGER_TEAM));
-    }, Text.literal("set glowing to danger")),
-    GIVE_ADVANCEMENT_BROKEN_BOAT((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                                  PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:death".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement muerto"), true),
-    GIVE_ADVANCEMENT_DANGER((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                             PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:danger".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement danger"), true),
-    GIVE_ADVANCEMENT_PAINT((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                            PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:gallery".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement galeria"), true),
-    GIVE_ADVANCEMENT_PORO_GALLETA_ADVANCE((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                                           PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:cook".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement poro galleta"), true),
-    GIVE_ADVANCEMENT_PHD((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                          PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:mary_corazon".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement Dr Mary Corazon"), true),
-    GIVE_ADVANCEMENT_LOADING_BAR((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                                  PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:piece_of_way".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement barra de carga"), true),
-    GIVE_ADVANCEMENT_INNER_PEACE((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                                  PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:inner_peace".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement paz mental"), true),
-    GIVE_ADVANCEMENT_DISK_BALL((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                                PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:big_party".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement bola disco"), true),
-    GIVE_ADVANCEMENT_POLAROID((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                               PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:polaroid".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement polaroid"), true),
-    GIVE_ADVANCEMENT_CONFETTI((MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                               PacketByteBuf buf, PacketSender responseSender) -> {
-        server.getCommandManager().executeWithPrefix(player.getCommandSource(), "advancement grant @p[team=%s] only mary-mod:end".formatted(MaryModClient.PLAYER_TEAM));
-    }, Text.literal("give advancement fiesta"), true),
+    }, Text.literal("set glowing to danger"))
     ;
 
     public final ActionHandler handle;

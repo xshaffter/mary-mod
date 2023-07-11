@@ -46,7 +46,7 @@ public class ItemManager {
     public static final Item FANSA_MUSIC_DISC = new ModMusicDiscItem(9, SoundManager.FANSA_MUSIC, 247);
     public static final Item RASPUTIN_DISC = new ModMusicDiscItem(9, SoundManager.RASPUTIN, 269);
     public static final Item DARK_CAVE_DISC = new ModMusicDiscItem(9, SoundManager.DARK_CAVE, 144);
-
+    public static final Item SMARTPHONE = new Smartphone();
 
     private static void registerItem(String name, Item item) {
         Registry.register(Registry.ITEM, new Identifier(MaryMod.MOD_ID, name), item);
@@ -75,5 +75,6 @@ public class ItemManager {
         registerItem("fansa_music_disc", FANSA_MUSIC_DISC);
         registerItem("rasputin_disc", RASPUTIN_DISC);
         registerItem("dark_cave_disc", DARK_CAVE_DISC);
+        registerItem("smartphone", SMARTPHONE);
     }
 }

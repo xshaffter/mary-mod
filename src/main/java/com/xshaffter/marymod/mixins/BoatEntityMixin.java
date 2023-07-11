@@ -1,10 +1,16 @@
 package com.xshaffter.marymod.mixins;
 
 
+import com.xshaffter.marymod.MaryModClient;
+import com.xshaffter.marymod.events.AdvancementManager;
+import com.xshaffter.marymod.util.PlayerEntityBridge;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +18,10 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Mixin(BoatEntity.class)
 abstract class BoatEntityMixin extends Entity {
@@ -39,6 +49,35 @@ abstract class BoatEntityMixin extends Entity {
 
     public BoatEntityMixin(EntityType<?> type, World world) {
         super(type, world);
+    }
+
+    @Inject(at = @At("HEAD"), method = "interact", cancellable = true)
+    public void howToInteract(PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+        var playerPos = user.getPos();
+        //check she's inside temple
+        //-108 6 200
+        //-119 12 184
+        var inX = playerPos.x < -108 && playerPos.x > -119;
+        var inY = playerPos.y > 6 && playerPos.y < 12;
+        var inZ = playerPos.z > 184 && playerPos.z < 200;
+        System.out.println(inX);
+        System.out.println(inY);
+        System.out.println(inZ);
+        if (inX && inY && inZ) {
+            System.out.println(":D");
+            if (user instanceof ServerPlayerEntity player) {
+                System.out.println(":D");
+                PlayerEntityBridge.executeCommand(player.world, player, "cinematic @p[team=%s] 100 boat_cinematic.mp4".formatted(MaryModClient.PLAYER_TEAM));
+                cir.setReturnValue(ActionResult.SUCCESS);
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        AdvancementManager.grantAdvancement(player, "death");
+                    }
+                }, 500L);
+            }
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "updateVelocity", cancellable = true)

@@ -12,12 +12,15 @@ import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.UUID;
+
 
 public class MaryMod implements ModInitializer {
 
     public static final String MOD_ID = "mary-mod";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static final boolean DEBUG = FabricLoader.getInstance().isDevelopmentEnvironment();
+    public static final UUID PARAMADA_UUID = UUID.fromString("a2d5d015-3f63-4831-8441-a96174639d82");
 
     @Override
     public void onInitialize() {

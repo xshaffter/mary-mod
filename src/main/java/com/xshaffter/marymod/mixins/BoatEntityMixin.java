@@ -51,35 +51,6 @@ abstract class BoatEntityMixin extends Entity {
         super(type, world);
     }
 
-    @Inject(at = @At("HEAD"), method = "interact", cancellable = true)
-    public void howToInteract(PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        var playerPos = user.getPos();
-        //check she's inside temple
-        //-108 6 200
-        //-119 12 184
-        var inX = playerPos.x < -108 && playerPos.x > -119;
-        var inY = playerPos.y > 6 && playerPos.y < 12;
-        var inZ = playerPos.z > 184 && playerPos.z < 200;
-        System.out.println(inX);
-        System.out.println(inY);
-        System.out.println(inZ);
-        if (inX && inY && inZ) {
-            System.out.println(":D");
-            if (user instanceof ServerPlayerEntity player) {
-                System.out.println(":D");
-                PlayerEntityBridge.executeCommand(player.world, player, "cinematic @p[team=%s] 100 boat_cinematic.mp4".formatted(MaryModClient.PLAYER_TEAM));
-                cir.setReturnValue(ActionResult.SUCCESS);
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        AdvancementManager.grantAdvancement(player, "death");
-                    }
-                }, 500L);
-            }
-        }
-    }
-
     @Inject(at = @At("HEAD"), method = "updateVelocity", cancellable = true)
     private void updateVelocity(CallbackInfo ci) {
         double d = -0.03999999910593033;

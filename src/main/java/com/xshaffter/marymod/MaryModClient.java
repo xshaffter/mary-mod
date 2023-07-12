@@ -42,6 +42,6 @@ public class MaryModClient implements ClientModInitializer {
     }
 
     public static String getModVersion() {
-        return "1.8";
+        return "1.10.2";
     }
 }
